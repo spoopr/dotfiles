@@ -9,31 +9,47 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a3d851ad-6add-4583-87a8-b9b2dd914f32";
-      fsType = "ext4";
+    { device = "none";
+      fsType = "tmpfs";
+      options = [ "size=2G" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B160-8007";
+    { device = "/dev/disk/by-uuid/A07B-B7EB";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/dea7059d-d0b2-494b-bd6f-ac0d2c5ee19c"; }
-    ];
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/74ee5e34-0229-433b-a290-077a5ba73bb7";
+      fsType = "ext4";
+      neededForBoot = true;
+    };
+
+  fileSystems."/etc/nixos" =
+    { device = "/persist/etc/nixos";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  fileSystems."/var/log" =
+    { device = "/persist/var/log";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp193s0f3u2.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

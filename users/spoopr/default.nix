@@ -15,6 +15,7 @@
   users.users.spoopr = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    hashedPasswordFile = "/persist/secrets/spoopr";
   };
 }
   

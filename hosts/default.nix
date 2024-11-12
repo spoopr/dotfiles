@@ -1,6 +1,7 @@
 {
   nixpkgs,
   self,
+  impermanence,
   ...
 }: let
   inherit (self) inputs;
@@ -14,6 +15,7 @@
         }
         ./${name}
         ./${name}/hardware-configuration.nix
+        impermanence.nixosModules.impermanence
       ] ++ map (x: ../users/${x}) users	 
       ++ builtins.attrValues self.nixosModules;
       specialArgs = {
