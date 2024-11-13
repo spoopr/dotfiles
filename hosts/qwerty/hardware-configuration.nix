@@ -25,20 +25,19 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/persist" =
+  fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/74ee5e34-0229-433b-a290-077a5ba73bb7";
       fsType = "ext4";
-      neededForBoot = true;
     };
 
   fileSystems."/etc/nixos" =
-    { device = "/persist/etc/nixos";
+    { device = "/nix/persist/etc/nixos";
       fsType = "none";
       options = [ "bind" ];
     };
 
   fileSystems."/var/log" =
-    { device = "/persist/var/log";
+    { device = "/nix/persist/var/log";
       fsType = "none";
       options = [ "bind" ];
     };
@@ -50,6 +49,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp193s0f3u2.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

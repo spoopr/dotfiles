@@ -7,7 +7,7 @@
       inherit pkgs;
       packages = [
         "git"
-        "gh"
+	"gh"
       ];
     })
   ]; 
@@ -15,7 +15,7 @@
   users.users.spoopr = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = "/persist/secrets/spoopr";
+    hashedPasswordFile = "/nix/persist/secrets/spoopr";
   };
 }
   

@@ -25,17 +25,16 @@
   };
 
   environment = {
-    persistence."/persist" = {
+    persistence."/nix/persist" = {
       directories = [
         "/etc/nixos"
         "/srv"
         "/var/lib"
         "/var/log"
-        "/nix"
       ];
     };
   
-    etc."machine-id".source = "/persist/etc/machine-id";
+    etc."machine-id".source = "/nix/persist/etc/machine-id";
 
   };
 
