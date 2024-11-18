@@ -8,6 +8,7 @@
       packages = [
         "git"
 	"gh"
+        "sbctl"
       ];
     })
   ]; 

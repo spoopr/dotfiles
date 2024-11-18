@@ -2,6 +2,7 @@
   nixpkgs,
   self,
   impermanence,
+  lanzaboote,
   ...
 }: let
   inherit (self) inputs;
@@ -16,6 +17,7 @@
         ./${name}
         ./${name}/hardware-configuration.nix
         impermanence.nixosModules.impermanence
+        lanzaboote.nixosModules.lanzaboote
       ] ++ map (x: ../users/${x}) users	 
       ++ builtins.attrValues self.nixosModules;
       specialArgs = {

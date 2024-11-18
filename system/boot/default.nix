@@ -1,11 +1,9 @@
 {
+  pkgs,
   ...
 }: {
   boot = {
-    loader = { 
-      systemd-boot = {
-        enable = true;
-      }; 
+    loader = {
       timeout = 0;
       efi.canTouchEfiVariables = true;
     };
@@ -14,13 +12,19 @@
       cleanOnBoot = true;
       useTmpfs = true;
     };
+
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
   
     initrd.luks.devices = {
-      root = {
-        device = "/dev/nvme0n1p2";
-        preLVM = true;
+        root = {
+          device = "/dev/nvme0n1p2";
+          preLVM = true;
+        };
       };
-    };
+    
 
   };
 
@@ -31,6 +35,7 @@
         "/srv"
         "/var/lib"
         "/var/log"
+        "/etc/secureboot"
       ];
     };
   
