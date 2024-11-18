@@ -2,6 +2,11 @@
   pkgs,
   ...
 }: {
+  
+  environment.systemPackages = with pkgs; [
+    tpm2-tss
+  ];
+
   boot = {
     loader = {
       timeout = 0;
@@ -15,16 +20,19 @@
 
     lanzaboote = {
       enable = true;
-      pkiBundle = "/etc/secureboot";
+      pkiBundle = "/nix/persist/secrets/secureboot";
     };
   
-    initrd.luks.devices = {
+    initrd = { 
+      systemd.enable = true;
+
+      luks.devices = {
         root = {
           device = "/dev/nvme0n1p2";
           preLVM = true;
         };
       };
-    
+    };
 
   };
 
@@ -35,7 +43,6 @@
         "/srv"
         "/var/lib"
         "/var/log"
-        "/etc/secureboot"
       ];
     };
   
