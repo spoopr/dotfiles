@@ -8,6 +8,7 @@
     ./network
     ./services
     ./users
+    ./secrets
   ];
 
   time.timeZone = "America/Chicago";

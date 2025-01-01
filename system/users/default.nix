@@ -1,5 +1,5 @@
 {
   ...
 }: {
-  users.users.root.hashedPasswordFile = "/nix/persist/secrets/root";
+  # users.users.root.hashedPasswordFile = "/nix/persist/secrets/root";
 }

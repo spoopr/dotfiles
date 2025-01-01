@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...		
 }: {
   imports = [
@@ -9,6 +10,8 @@
         "git"
 	"gh"
         "sbctl"
+	"age-plugin-fido2-hmac"
+	"age-plugin-tpm"
       ];
     })
   ]; 
@@ -16,7 +19,7 @@
   users.users.spoopr = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = "/nix/persist/secrets/spoopr";
+    hashedPasswordFile = config.age.secrets.spooprPassword.path;
   };
 }
   

@@ -8,9 +8,10 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, impermanence, lanzaboote } @ inputs: {  
+  outputs = { self, nixpkgs, impermanence, lanzaboote, agenix } @ inputs: {  
     nixosConfigurations = import ./hosts inputs; 
     nixosModules = {
       system = import ./system;

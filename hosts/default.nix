@@ -3,6 +3,7 @@
   self,
   impermanence,
   lanzaboote,
+  agenix,
   ...
 }: let
   inherit (self) inputs;
@@ -14,12 +15,19 @@
         { 	
           networking.hostName = name;
         }
+	{
+	  environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
+	}
         ./${name}
         ./${name}/hardware-configuration.nix
         impermanence.nixosModules.impermanence
         lanzaboote.nixosModules.lanzaboote
-      ] ++ map (x: ../users/${x}) users	 
-      ++ builtins.attrValues self.nixosModules;
+	agenix.nixosModules.default
+      ] ++ builtins.attrValues self.nixosModules
+      ++ map (x: ../users/${x}) users	 
+      ++ [ ({ config, ... }: {
+	users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
+      }) ];
       specialArgs = {
         pkgs = nixpkgs.legacyPackages.${system};
       };	          
