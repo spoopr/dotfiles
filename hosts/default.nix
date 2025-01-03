@@ -27,6 +27,7 @@
       ++ map (x: ../users/${x}) users	 
       ++ [ ({ config, ... }: {
 	users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
+	networking.wg-quick.interfaces.awa.privateKeyFile = config.age.secrets.awaPrivateKey.path;
       }) ];
       specialArgs = {
         pkgs = nixpkgs.legacyPackages.${system};

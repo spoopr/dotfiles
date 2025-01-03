@@ -11,6 +11,8 @@
     secrets = {
         rootPassword.file = /nix/persist/secrets/buildSecrets/passwords/root.age;
 	spooprPassword.file = /nix/persist/secrets/buildSecrets/passwords/spoopr.age;
+	
+	awaPrivateKey.file = /nix/persist/secrets/buildSecrets/wireguard/awa.age;
     };
   };
 
