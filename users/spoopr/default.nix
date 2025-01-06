@@ -18,7 +18,10 @@
 
   users.users.spoopr = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ 
+      "wheel" 
+      "networkmanager"
+    ];
     hashedPasswordFile = config.age.secrets.spooprPassword.path;
   };
 }

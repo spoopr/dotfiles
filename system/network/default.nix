@@ -2,11 +2,23 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = [
-    pkgs.iptables
+  environment.systemPackages = with pkgs; [
+    iptables
   ];
 
   networking = {
+    
+    networkmanager = {
+      enable = true;
+      dns = "none";
+      wifi = {
+        powersave = true;
+        macAddress = "random";
+      };
+    };
+    useDHCP = false;
+    dhcpcd.enable = false;
+
     firewall = {
       enable = true;
       allowPing = false;
