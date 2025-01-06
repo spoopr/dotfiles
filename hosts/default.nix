@@ -35,8 +35,8 @@
     };
 
 in {
-  a = mkHost {
-    name = "qwerty";
+  awa = mkHost {
+    name = "awa";
     system = "x86_64-linux"; 
     users = [
       "spoopr"
