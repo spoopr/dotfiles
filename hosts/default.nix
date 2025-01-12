@@ -1,45 +1,20 @@
 {
-  nixpkgs,
-  self,
-  impermanence,
-  lanzaboote,
-  agenix,
   ...
-}: let
-  inherit (self) inputs;
-  
-  mkHost = { name, system, users }:
-    nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        { 	
-          networking.hostName = name;
-        }
-	{
-	  environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
-	}
-        ./${name}
-        ./${name}/hardware-configuration.nix
-        impermanence.nixosModules.impermanence
-        lanzaboote.nixosModules.lanzaboote
-	agenix.nixosModules.default
-      ] ++ builtins.attrValues self.nixosModules
-      ++ map (x: ../users/${x}) users	 
-      ++ [ ({ config, ... }: {
-	users.users.root.hashedPasswordFile = config.age.secrets.rootPassword.path;
-	networking.wg-quick.interfaces.awa.privateKeyFile = config.age.secrets.awaPrivateKey.path;
-      }) ];
-      specialArgs = {
-        pkgs = nixpkgs.legacyPackages.${system};
-      };	          
-    };
+}: let  
+  mkHost = name: value: {
+    inherit (value) system;
 
-in {
-  awa = mkHost {
-    name = "awa";
-    system = "x86_64-linux"; 
-    users = [
-      "spoopr"
+    hardwareModules = [
+      {
+        networking.hostName = name;
+      }
+      ./${name}
+      ./${name}/hardware-configuration.nix
     ];
+  };
+
+in builtins.mapAttrs mkHost {
+  awa = {
+    system = "x86_64-linux"; 
   };
 }

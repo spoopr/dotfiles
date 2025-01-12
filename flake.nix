@@ -9,13 +9,38 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
+    secrets.url = "/nix/persist/secrets";
   };
 
-  outputs = { self, nixpkgs, impermanence, lanzaboote, agenix } @ inputs: {  
-    nixosConfigurations = import ./hosts inputs; 
-    nixosModules = {
-      system = import ./system;
-    };
- 
+  outputs = { self, nixpkgs, impermanence, lanzaboote, agenix, secrets } @ inputs: let
+    hosts = import ./hosts inputs;
+    systemConfiguration = import ./system;
+    moduleConfiguration = import ./modules;
+
+    mkConfig =  name: host: nixpkgs.lib.nixosSystem {
+        inherit (host) system;
+
+        modules = host.hardwareModules 
+	++ [
+	  impermanence.nixosModules.impermanence
+	  lanzaboote.nixosModules.lanzaboote
+	  agenix.nixosModules.default
+	  secrets.nixosModules.secrets
+
+	  moduleConfiguration
+	  systemConfiguration
+        ];
+
+	specialArgs = {
+	  pkgs = nixpkgs.legacyPackages.${host.system};
+	  inherit inputs;
+
+	  inherit host;
+	  hostName = name;
+	};
+      };
+
+  in {  
+    nixosConfigurations =  builtins.mapAttrs mkConfig hosts;
   };
 }
