@@ -12,7 +12,7 @@
     secrets.url = "/nix/persist/secrets";
   };
 
-  outputs = { self, nixpkgs, impermanence, lanzaboote, agenix, secrets } @ inputs: let
+  outputs = { self, nixpkgs, ... } @ inputs: let
     hosts = import ./hosts inputs;
     systemConfiguration = import ./system;
     moduleConfiguration = import ./modules;
@@ -21,7 +21,7 @@
         inherit (host) system;
 
         modules = host.hardwareModules 
-	++ [
+	++ (with inputs; [
 	  impermanence.nixosModules.impermanence
 	  lanzaboote.nixosModules.lanzaboote
 	  agenix.nixosModules.default
@@ -29,7 +29,7 @@
 
 	  moduleConfiguration
 	  systemConfiguration
-        ];
+        ]);
 
 	specialArgs = {
 	  pkgs = nixpkgs.legacyPackages.${host.system};
