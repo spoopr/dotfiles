@@ -15,7 +15,7 @@
   outputs = { self, nixpkgs, ... } @ inputs: let
     hosts = import ./hosts inputs;
     systemConfiguration = import ./system;
-    moduleConfiguration = import ./modules;
+    moduleConfiguration = import ./config;
 
     mkConfig =  name: host: nixpkgs.lib.nixosSystem {
         inherit (host) system;
