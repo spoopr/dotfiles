@@ -6,7 +6,7 @@
     ./nix
     ./security
     ./network
-    ./services
+    ./firmware
     ./users
     ./secrets
   ];
