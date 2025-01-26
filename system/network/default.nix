@@ -8,17 +8,27 @@
   ];
 
   networking = {
-    
-    networkmanager = {
+
+    wireless.iwd = {
       enable = true;
-      dns = "none";
-      wifi = {
-        powersave = true;
-        macAddress = "random";
+      settings = {
+	Network = {
+	  EnableIPv6 = true;
+	};
+	General = {
+	  AddressRandomization = "once";
+	};
+	Scan = {
+	  DisablePeriodicScan = true;
+	};
       };
     };
-    useDHCP = false;
-    dhcpcd.enable = false;
+    dhcpcd = {
+      enable = true;
+      extraConfig = ''
+	anonymous
+      '';
+    };    
 
     firewall = {
       enable = true;
