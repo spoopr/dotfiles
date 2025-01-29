@@ -4,7 +4,7 @@
   imports = [
     ./git
     ./ssh
-    ./hyprland
+    ./hypr
     ./foot
     ./mullvadBrowser
   ];
