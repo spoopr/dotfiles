@@ -6,5 +6,6 @@
     ./ssh
     ./hyprland
     ./foot
+    ./mullvadBrowser
   ];
 }
