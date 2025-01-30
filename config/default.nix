@@ -7,5 +7,6 @@
     ./hypr
     ./foot
     ./mullvadBrowser
+    ./neovim
   ];
 }
