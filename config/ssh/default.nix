@@ -1,6 +1,10 @@
 {
   ...
 }: {
+  programs.ssh = {
+    enableAskPassword = true;
+  };
+
   services = {
     openssh.settings = {
       passwordAuthentication = false;
@@ -14,5 +18,7 @@
 	AuthenticationMethods publickey
       '';
     };
+
+    sshd.enable = false;
   };
 }	

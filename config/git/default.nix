@@ -8,8 +8,20 @@
         user = {
           email = "spoopr@users.noreply.github.com";
           name = "spoopr";
+	  signingkey = "${./pen.pub}";
         };
-        init = { defaultBranch = "main"; };
+        init = { 
+	  defaultBranch = "main"; 
+	};
+	gpg = {
+	  format = "ssh";
+	};
+	commit = {
+	  gpgSign = true;
+	};
+	tag = {
+	  gpgSign = true;
+	};
       };
     };
 
