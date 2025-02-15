@@ -9,6 +9,7 @@
     ./firmware
     ./users
     ./secrets
+    ./fonts
   ];
 
   time.timeZone = "America/Chicago";
