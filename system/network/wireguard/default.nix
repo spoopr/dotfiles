@@ -4,6 +4,16 @@
   ...
 }: {
 
+  boot.kernelModules = [
+    "wireguard" 
+    "xt_addrtype"
+    "xt_comment"
+    "xt_mark"
+    "xt_connmark"
+    "xt_conntrack"
+    "ipt_REJECT"
+  ];
+
   networking = {
     firewall.allowedUDPPorts = [ 80 ];
 
