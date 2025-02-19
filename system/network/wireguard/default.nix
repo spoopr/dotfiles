@@ -15,7 +15,7 @@
   ];
 
   networking = {
-    firewall.allowedUDPPorts = [ 80 ];
+    firewall.allowedUDPPorts = [ 51820 ];
 
     wg-quick.interfaces = {
       awa = {
@@ -23,7 +23,7 @@
 
         address = [ "10.2.0.2/32" ];
 	dns = [ "10.2.0.1" ];
-	listenPort = 80;	
+	listenPort = 51820;	
 
 	privateKeyFile = config.age.secrets.awaPrivateKey.path; 
 
@@ -32,11 +32,9 @@
 
 	peers = [
 	  {
-	    publicKey = "agoivyLoPqor8MxA/s6UWJSMcA2pMl+ajO3vy/q3oWQ=";
+	    publicKey = "7FslkahrdLwGbv4QSX5Cft5CtQLmBUlpWC382SSF7Hw=";
 	    allowedIPs = [ "0.0.0.0/0" ];
-	    endpoint = "103.125.235.18:51820";
-
-	    persistentKeepalive = 30;
+	    endpoint = "185.159.156.37:51820";
 	  }
 	];
       };
