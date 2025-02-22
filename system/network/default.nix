@@ -9,6 +9,11 @@
     ./wireguard
   ];
 
+  # dhcpcd kernel modules
+  boot.kernelModules = [
+    "af_packet"	
+  ];
+
   networking = {
     enableIPv6 = false;
 
