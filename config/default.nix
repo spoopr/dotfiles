@@ -9,5 +9,6 @@
     ./mullvadBrowser
     ./neovim
     ./tor
+    ./protonPass
   ];
 }
