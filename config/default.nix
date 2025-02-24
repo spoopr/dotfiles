@@ -8,5 +8,6 @@
     ./foot
     ./mullvadBrowser
     ./neovim
+    ./tor
   ];
 }
