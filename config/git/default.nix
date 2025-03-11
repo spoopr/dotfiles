@@ -6,7 +6,7 @@
       enable = true;
       config = {
         user = {
-          email = "spoopr@users.noreply.github.com";
+          email = "spoopr@nootr.dev";
           name = "spoopr";
 	  signingkey = "${./pen.pub}";
         };
