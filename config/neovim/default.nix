@@ -2,13 +2,13 @@
   pkgs,
   ...
 }: let 
-  config = {
+  config = pkgs.neovimUtils.makeNeovimConfig {
     customRC = ''
       :luafile ${./init.lua}
     '';
     plugins = with pkgs.vimPlugins; [
-      nvim-treesitter
       nvim-treesitter.withAllGrammars
+      leap-nvim
     ];
   };
 in {
