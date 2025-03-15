@@ -24,6 +24,9 @@ in {
 	lua-language-server
 	nixd
 	typescript-language-server
+
+	# copy / paste
+	wl-clipboard
   ] ++ [
     (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped config)
   ];
