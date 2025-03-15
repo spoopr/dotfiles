@@ -93,3 +93,6 @@ lspconfig.lua_ls.setup({
 lspconfig.nixd.setup({
 	capabilities = capabilities
 })
+lspconfig.ts_ls.setup({
+	capabilities = capabilities
+})

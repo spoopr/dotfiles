@@ -23,6 +23,7 @@ in {
 	jdt-language-server
 	lua-language-server
 	nixd
+	typescript-language-server
   ] ++ [
     (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped config)
   ];
