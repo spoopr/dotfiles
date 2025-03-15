@@ -9,10 +9,21 @@
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter.withAllGrammars
       leap-nvim
+
+	  # autocomplete
+	  nvim-cmp
+	  nvim-lspconfig
+	  cmp-buffer
+	  cmp-nvim-lsp
     ];
   };
 in {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
+    # language servers
+	jdt-language-server
+	lua-language-server
+	nixd
+  ] ++ [
     (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped config)
   ];
 
