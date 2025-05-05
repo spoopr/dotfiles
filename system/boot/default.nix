@@ -52,8 +52,8 @@ in {
 		external = {
 			enable = true;
 			installHook = lib.mkForce
-				( pkgs.concatScript "overlaidInstallHook" [
-					secrets.boot.overlaidInstallHook
+				(pkgs.concatScript "overlaidInstallHook" [
+					secrets.boot.secretsHook
 					evalaboote.config.boot.loader.external.installHook
 				]);
 		};
