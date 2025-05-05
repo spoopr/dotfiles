@@ -8,7 +8,6 @@
     ./network
     ./firmware
     ./users
-    ./secrets
     ./fonts
   ];
 
