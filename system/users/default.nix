@@ -1,19 +1,19 @@
 {
-  config,
+  secrets,
   ...
 }: {
   users.users = {
     root = {
-      hashedPasswordFile = config.age.secrets.rootPassword.path;
+      hashedPasswordFile = secrets.passwords.root;
     };
 
     spoopr = {
       isNormalUser = true;
       extraGroups = [
-	"wheel"
-	"networkmanager"
+		"wheel"
+		"networkmanager"
       ];
-      hashedPasswordFile = config.age.secrets.spooprPassword.path;
+      hashedPasswordFile = secrets.passwords.spoopr;
     };
   };
 }

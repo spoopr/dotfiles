@@ -1,7 +1,7 @@
 {
   pkgs,
-  config,
   lib,
+  secrets,
   ...
 }: let
   mkService = name: { config, auth }: {
@@ -26,8 +26,8 @@ in {
 
   systemd.services = builtins.mapAttrs mkService {
     "openvpn-awa" = {
-      config = config.age.secrets.awaConfig.path;
-      auth = config.age.secrets.spooprAuth.path;
+      config = secrets.vpn.openvpn."awa.tcp.ovpn";
+      auth = secrets.vpn.openvpn.spoopr; 
     };
   };
 }
