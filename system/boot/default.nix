@@ -39,7 +39,7 @@
 
 in {  
 
-	environment.systempackages = with pkgs; [
+	environment.systemPackages = with pkgs; [
 		tpm2-tss
 		sbctl
 	];
@@ -47,22 +47,22 @@ in {
 	boot = {
 		loader = {
 			timeout = 0;
-			efi.cantouchefivariables = true;
+			efi.canTouchEfiVariables = true;
 
 			external = {
 				enable = true;
-				installhook = lib.mkforce
-					(pkgs.concatscript "overlaidinstallhook" [
-						secrets.boot.secretshook
-						evalaboote.config.boot.loader.external.installhook
+				installHook = lib.mkForce
+					(pkgs.concatScript "overlaidInstallHook" [
+						secrets.boot.secretsHook
+						evalaboote.config.boot.loader.external.installHook
 					]);
 			};
 		};
 
 		lanzaboote = {
 			enable = true;
-			publickeyfile = secrets.boot.publickeyfile;
-			privatekeyfile = secrets.boot.privatekeyfile;
+			publicKeyFile = secrets.boot.publicKeyFile;
+			privateKeyFile = secrets.boot.privateKeyFile;
 		};
 
 		initrd = {
@@ -71,14 +71,14 @@ in {
 			luks.devices = {
 				root = {
 					device = "/dev/nvme0n1p2";
-					prelvm = true;
+					preLVM = true;
 				};
 			};
 		};
 
 		tmp = {
-			cleanonboot = true;
-			usetmpfs = true;
+			cleanOnBoot = true;
+			useTmpfs = true;
 		};
 
 	};
