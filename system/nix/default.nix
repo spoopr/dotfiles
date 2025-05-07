@@ -1,24 +1,28 @@
 {
-  pkgs,
   ...
 }: {
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      allowed-users = [ "@wheel" ];
-      trusted-users = [ "@wheel" ];
-      warn-dirty = false;
-      sandbox = true;
+	nix = {
+		settings = {
+			experimental-features = [
+				"nix-command" 
+				"flakes" 
+				"pipe-operators"
+			];
 
-      substituters = [
-        "https://cache.nixos.org"
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+			allowed-users = [ "@wheel" ];
+			trusted-users = [ "@wheel" ];
 
-    };
-  };
+			warn-dirty = false;
+			sandbox = true;
 
-  # environment.defaultPackages = lib.mkForce [];
+			substituters = [
+				"https://cache.nixos.org"
+			];
+			trusted-public-keys = [
+				"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+			];
+		};
+	};
+
+	# environment.defaultPackages = lib.mkForce [];
 }

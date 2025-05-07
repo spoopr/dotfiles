@@ -2,8 +2,7 @@
   pkgs,
   ...
 }: {
-  
-  environment.systemPackages = with pkgs; [
-    mullvad-browser
-  ];
+	environment.systemPackages = with pkgs; [
+		mullvad-browser
+	];
 }

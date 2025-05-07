@@ -32,69 +32,67 @@
 		];
 
 		specialArgs = {
-			inherit pkgs;
+		inherit pkgs;
 		};
 	};
 
 
 in {  
 
-  environment.systemPackages = with pkgs; [
-	tpm2-tss
-	sbctl
-  ];
+	environment.systempackages = with pkgs; [
+		tpm2-tss
+		sbctl
+	];
 
-  boot = {
-	loader = {
-	  timeout = 0;
-	  efi.canTouchEfiVariables = true;
-	
-		external = {
+	boot = {
+		loader = {
+			timeout = 0;
+			efi.cantouchefivariables = true;
+
+			external = {
+				enable = true;
+				installhook = lib.mkforce
+					(pkgs.concatscript "overlaidinstallhook" [
+						secrets.boot.secretshook
+						evalaboote.config.boot.loader.external.installhook
+					]);
+			};
+		};
+
+		lanzaboote = {
 			enable = true;
-			installHook = lib.mkForce
-				(pkgs.concatScript "overlaidInstallHook" [
-					secrets.boot.secretsHook
-					evalaboote.config.boot.loader.external.installHook
-				]);
+			publickeyfile = secrets.boot.publickeyfile;
+			privatekeyfile = secrets.boot.privatekeyfile;
 		};
-	};
 
-	lanzaboote = {
-		enable = true;
-		  publicKeyFile = secrets.boot.publicKeyFile;
-		  privateKeyFile = secrets.boot.privateKeyFile;
-	};
+		initrd = {
+			systemd.enable = true;
 
-	initrd = { 
-	  systemd.enable = true;
-
-	  luks.devices = {
-		root = {
-		  device = "/dev/nvme0n1p2";
-		  preLVM = true;
+			luks.devices = {
+				root = {
+					device = "/dev/nvme0n1p2";
+					prelvm = true;
+				};
+			};
 		};
-	  };
+
+		tmp = {
+			cleanonboot = true;
+			usetmpfs = true;
+		};
+
 	};
 
-	tmp = {
-	  cleanOnBoot = true;
-	  useTmpfs = true;
+	environment = {
+		persistence."/nix/persist" = {
+			directories = [
+				"/etc/nixos"
+				"/srv"
+				"/var/lib"
+				"/var/log"
+			];
+		};
+
+		etc."machine-id".source = "/nix/persist/etc/machine-id";
 	};
-
-  };
-
-  environment = {
-	persistence."/nix/persist" = {
-	  directories = [
-		"/etc/nixos"
-		"/srv"
-		"/var/lib"
-		"/var/log"
-	  ];
-	};
-  
-	etc."machine-id".source = "/nix/persist/etc/machine-id";
-
-  };
-
 }

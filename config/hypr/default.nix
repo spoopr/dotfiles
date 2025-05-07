@@ -1,8 +1,8 @@
 {
   ...
 }: {
-  imports = [
-    ./hyprland
-    ./hyprpaper
-  ];
+	imports = [
+		./hyprland
+		./hyprpaper
+	];
 }

@@ -1,14 +1,14 @@
 {
   ...
 }: {
-  imports = [
-    ./git
-    ./ssh
-    ./hypr
-    ./foot
-    ./mullvadBrowser
-    ./neovim
-    ./tor
-    ./protonPass
-  ];
+	imports = [
+		./git
+		./ssh
+		./hypr
+		./foot
+		./mullvadBrowser
+		./neovim
+		./tor
+		./protonPass
+	];
 }

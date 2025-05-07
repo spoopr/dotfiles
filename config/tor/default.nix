@@ -2,8 +2,7 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    tor-browser
-  ];
-
+	environment.systemPackages = with pkgs; [
+		tor-browser
+	];
 }
