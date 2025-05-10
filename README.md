@@ -15,7 +15,8 @@ I'd like to thank these few, from which I've derived parts of my knowledge or de
   <a href="https://github.com/vimjoyer">vimjoyer</a> -
   <a href="https://github.com/raexera">raexera</a> -
   <a href="https://github.com/xe">xe</a> -
-  <a href="https://github.com/ryantm">ryantm</a>
+  <a href="https://github.com/ryantm">ryantm</a> -
+  <a href="https://github.com/qfpl">qfpl</a>
 </p>
 
 And to those I've forgotten, thank you aswell.
