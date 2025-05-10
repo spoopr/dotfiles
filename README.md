@@ -13,5 +13,7 @@ Much of my knowledge or parts of my design were derived from these individuals:
 <p align="center">
   <a href="https://github.com/sioodmy">sioodmy</a> - 
   <a href="https://github.com/vimjoyer">vimjoyer</a> -
-  <a href="https://github.com/raexera">raexera</a>
+  <a href="https://github.com/raexera">raexera</a> -
+  <a href="https://github.com/xe">xe</a> -
+  <a href="https://github.com/ryantm">ryantm</a>
 </p>
