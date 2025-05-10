@@ -6,8 +6,8 @@
 		splash = false
 		ipc = false
 
-		preload = ${./behold.jpg}
-		wallpaper = , ${./behold.jpg}
+		preload = ${./osaka.png}
+		wallpaper = , ${./osaka.png}
 	''; 
 
 in {
