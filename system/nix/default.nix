@@ -1,4 +1,5 @@
 {
+  lib,
   ...
 }: {
 	nix = {
@@ -24,5 +25,5 @@
 		};
 	};
 
-	# environment.defaultPackages = lib.mkForce [];
+	environment.defaultPackages = lib.mkForce [];
 }
