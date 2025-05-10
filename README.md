@@ -8,7 +8,7 @@ Much is still in the works, so this configuration is very minimal.
 
 ## Credits
 
-Much of my knowledge or parts of my design were derived from these individuals:
+I'd like to thank these few, from which I've derived parts of my knowledge or design.
 
 <p align="center">
   <a href="https://github.com/sioodmy">sioodmy</a> - 
@@ -17,3 +17,5 @@ Much of my knowledge or parts of my design were derived from these individuals:
   <a href="https://github.com/xe">xe</a> -
   <a href="https://github.com/ryantm">ryantm</a>
 </p>
+
+And to those I've forgotten, thank you aswell.
