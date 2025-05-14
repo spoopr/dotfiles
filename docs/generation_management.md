@@ -7,7 +7,7 @@ sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 
 ## deleting
 ```bash
-sudo nix-env --delet-generations --profile /nix/var/nix/profiles/system *filter options*
+sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system *filter options*
 ```
 
 # done
