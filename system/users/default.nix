@@ -10,8 +10,8 @@
 		spoopr = {
 			isNormalUser = true;
 			extraGroups = [
-			"wheel"
-			"networkmanager"
+				"wheel"
+				"networkmanager"
 			];
 			hashedPasswordFile = secrets.passwords.spoopr;
 		};
