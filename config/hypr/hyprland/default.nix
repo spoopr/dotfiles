@@ -1,15 +1,41 @@
 {
   pkgs,
   ...
-}: {
+}: let
+ wrapperland = (pkgs.symlinkJoin {
+		name = "wrappedHyprland";
+		paths = [ pkgs.hyprland ];
+		buildInputs = [ pkgs.makeWrapper ];
+		postBuild = ''
+		wrapProgram $out/bin/Hyprland --add-flags "-c ${./hyprland.conf}"
+		'';
+	});
+
+in{
 	environment.systemPackages = [
-		(pkgs.symlinkJoin {
-			name = "wrappedHyprland";
-			paths = [ pkgs.hyprland ];
-			buildInputs = [ pkgs.makeWrapper ];
-			postBuild = ''
-				wrapProgram $out/bin/Hyprland --add-flags "-c ${./hyprland.conf}"
-			'';
-		})
+		wrapperland	
 	];
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [ 
+			xdg-desktop-portal-hyprland 
+			xdg-desktop-portal-gtk
+		];
+		configPackages = [ wrapperland ];
+
+		wlr.enable = false;
+	};
+
+	security = {
+		polkit.enable = true;
+		pam.services.swaylock = {};
+	};
+
+	programs = {
+		dconf.enable = true;
+		xwayland.enable = true;
+	};
+
+	services.graphical-desktop.enable = true;
 }
