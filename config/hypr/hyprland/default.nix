@@ -19,7 +19,6 @@ in{
 	xdg.portal = {
 		enable = true;
 		extraPortals = with pkgs; [ 
-			xdg-desktop-portal-hyprland 
 			xdg-desktop-portal-gtk
 		];
 		configPackages = [ wrapperland ];
@@ -29,7 +28,6 @@ in{
 
 	security = {
 		polkit.enable = true;
-		pam.services.swaylock = {};
 	};
 
 	programs = {
