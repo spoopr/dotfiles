@@ -1,6 +1,6 @@
 > :3
 
-Exactly what the title says, designed however I was feeling on whatever day it was written. Good luck.
+My personal NixOS configuration, designed however I was feeling on whatever day it was written. Good luck.
 
 
 <br />
