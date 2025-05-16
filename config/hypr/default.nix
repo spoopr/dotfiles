@@ -4,5 +4,6 @@
 	imports = [
 		./hyprland
 		./hyprpaper
+		./hyprlock
 	];
 }
