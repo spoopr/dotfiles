@@ -70,6 +70,7 @@ releasing the LUKS partition key.
 ## Security / Privacy
 This is more for myself, as a to-do and a to-done. If you think there's any possible vectors or attack types I'm missing,
 please, let me know.
+## 
 
 - [x] Evil maid attacks
 	- [x] Secureboot
