@@ -40,6 +40,7 @@ All of the mostly to absolutely essential configuration, like configuring boot, 
 
 <br />
 
+
 ## System structure
 This is what I imagine would be the largest hurdle for anyone trying to adopt this configuration. 
 
@@ -62,6 +63,19 @@ secureboot is enabled. This stretches a little beyond scope of NixOS dotfiles, b
 machine are assumed to be LUKS encrypted, which I've bound to be unlocked automatically on boot by the TMP.
 The TMP itself checks the contents of the boot partition and whether secureboot completed successfully before
 releasing the LUKS partition key.
+
+
+<br />
+
+
+## Machines
+
+### `awa`
+My daily use laptop, a pretty endgame spec AMD Framework 13.
+
+| Processor         | Graphics                | Memory    | Storage  |
+| :---------------: | :---------------------: | :-------: | :------: |
+| AMD Ryzen 7 7840U | Integrated Raydeon 700M | 32GB DDR5 | 1TB NVMe |
 
 
 <br />
@@ -92,12 +106,15 @@ please, let me know.
 - [ ] Implement an official ProtonVPN app
 	- To allow for much easier / automatic rotation of VPN host servers
 
+
 <br />
 
 
 ## Credits
 I'd like to thank these few, from which I've derived parts of my knowledge or design.
 
+<!-- i ripped this directly from raexera/yuki/readme -->
+<!-- heys its really cool -->
 <p align="center">
   <a href="https://github.com/sioodmy">sioodmy</a> - 
   <a href="https://github.com/vimjoyer">vimjoyer</a> -
