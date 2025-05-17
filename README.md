@@ -44,7 +44,7 @@ All of the mostly to absolutely essential configuration, like configuring boot, 
 This is what I imagine would be the largest hurdle for anyone trying to adopt this configuration. 
 
 First of all, my configuration uses `impermanence`. While this isn't too restrictive in itself, it does require some
-consideration when installing certain programs. Additionally, since `/` is not persistent because of that, the disk
+consideration when installing certain programs. Additionally, since `/` is not persistent, the disk
 partition that I assume normally would be bound to it is bound to `/nix` instead.
 
 Second, this configuration uses a custom [`agenix`](https://github.com/ryantm/agenix) based secrets flake.
@@ -59,9 +59,9 @@ higher priorities until then.
 
 Third, and really the least important, this configuration assumes that your system is secureboot compatible and that 
 secureboot is enabled. This stretches a little beyond scope of NixOS dotfiles, but the disk partitions for any given 
-machine are assumed to be LUKs encrypted, which I've bound to be unlocked automatically on boot by the TMP.
+machine are assumed to be LUKS encrypted, which I've bound to be unlocked automatically on boot by the TMP.
 The TMP itself checks the contents of the boot partition and whether secureboot completed successfully before
-releasing the LUKs partition key.
+releasing the LUKS partition key.
 
 <br />
 
