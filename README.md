@@ -63,6 +63,34 @@ machine are assumed to be LUKS encrypted, which I've bound to be unlocked automa
 The TMP itself checks the contents of the boot partition and whether secureboot completed successfully before
 releasing the LUKS partition key.
 
+
+<br />
+
+
+## Security / Privacy
+This is more for myself, as a to-do and a to-done. If you think there's any possible vectors or attack types I'm missing,
+please, let me know.
+
+- [x] Evil maid attacks
+	- [x] Secureboot
+	- [x] LUKS encrypted disks, locked against the TPM with PCRs 0, 2, 7, 8
+- [ ] DMA attacks
+	- Supposedly the firmware in `awa` will halt a boot if chassis intrusion is detected, but I don't know if it will shutdown
+	on a detected chassis intrusion after boot.
+	- If not, then I need to create a service to do so.
+- [ ] Kernel modules
+	- It'd probably be a good idea to blacklist certain modules
+	- [ ] Enable additional entropy modules?
+- [ ] General kernel and boot hardening
+- [ ] Restrict access on important directories
+- [ ] Zram / Zswap to reduce the chance of swapping important data
+- [ ] Encrypted swap partition
+- [ ] Isolate / restrict USB and other ports
+- [ ] Harden / anonymize wireless connections
+	- [x] `dhcpcd` is configured with the `anonymous` flag, which implements [RFC 7488](https://datatracker.ietf.org/doc/html/rfc7488)
+- [ ] Implement an official ProtonVPN app
+	- To allow for much easier / automatic rotation of VPN host servers
+
 <br />
 
 
@@ -75,7 +103,8 @@ I'd like to thank these few, from which I've derived parts of my knowledge or de
   <a href="https://github.com/raexera">raexera</a> -
   <a href="https://github.com/xe">xe</a> -
   <a href="https://github.com/ryantm">ryantm</a> -
-  <a href="https://github.com/qfpl">qfpl</a>
+  <a href="https://github.com/qfpl">qfpl</a> - 
+  <a href="https://github.com/cynicsketch">cynicsketch</a>
 </p>
 
 And to those I've forgotten, thank you aswell.
