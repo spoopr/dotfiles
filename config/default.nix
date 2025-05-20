@@ -10,5 +10,6 @@
 		./neovim
 		./tor
 		./protonPass
+		./zsh
 	];
 }
