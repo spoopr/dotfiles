@@ -6,9 +6,15 @@
 		./wireguard
 	];
 
-	# dhcpcd kernel modules
 	boot.kernelModules = [
+		# dhcpcd kernel modules
 		"af_packet"	
+		# usb ethernet modules
+		"usbnet"
+		"cdc_ether"
+		"cdc_mbim"
+		"cdc_wdm"
+		"cdc_ncm"
 	];
 
 	networking = {
