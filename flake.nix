@@ -34,7 +34,7 @@
 				pkgs = nixpkgs.legacyPackages.${host.system};
 				inherit inputs;
 				host = host // { inherit name; };
-				secrets = inputs.secrets.${name};
+				secrets = inputs.secrets.hostSecrets.${name};
 			};
 		};
 
