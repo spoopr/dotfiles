@@ -9,6 +9,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		secrets.url = "/nix/persist/secrets";
+		colors.url = "/nix/persist/colors";
 	};
 
 	outputs = { nixpkgs, ... } @ inputs: let
@@ -35,6 +36,7 @@
 				inherit inputs;
 				host = host // { inherit name; };
 				secrets = inputs.secrets.hostSecrets.${name};
+				inherit (inputs.colors) colors;
 			};
 		};
 

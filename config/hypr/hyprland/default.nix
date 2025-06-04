@@ -1,17 +1,26 @@
 {
   pkgs,
+  colors,
   ...
 }: let
- wrapperland = (pkgs.symlinkJoin {
+
+	wrapperlandConfig = builtins.toFile "wrapperlandConfig" (''
+		$primaryColor = rgb(${builtins.substring 1 (-1) colors.lavendar.hex})
+		$secondaryColor = rgb(${builtins.substring 1 (-1) colors.black.hex})
+	'' + (builtins.readFile ./hyprland.conf)
+	);
+
+	wrapperland = (pkgs.symlinkJoin {
 		name = "wrappedHyprland";
 		paths = [ pkgs.hyprland ];
 		buildInputs = [ pkgs.makeWrapper ];
 		postBuild = ''
-		wrapProgram $out/bin/Hyprland --add-flags "-c ${./hyprland.conf}"
+		wrapProgram $out/bin/Hyprland --add-flags "-c ${wrapperlandConfig}"
 		'';
 	});
 
-in{
+in {
+
 	environment.systemPackages = [
 		wrapperland	
 	];
