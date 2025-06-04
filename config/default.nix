@@ -11,5 +11,6 @@
 		./tor
 		./protonPass
 		./zsh
+		./glow
 	];
 }
