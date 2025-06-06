@@ -90,8 +90,8 @@ please, let me know.
 	- [x] Secureboot
 	- [x] LUKS encrypted disks, locked against the TPM with PCRs 0, 2, 7, 8
 - [ ] DMA attacks
-	- Supposedly the firmware in `awa` will halt a boot if chassis intrusion is detected, but I don't know if it will shutdown
-	on a detected chassis intrusion after boot.
+	- ~~Supposedly the firmware in `awa` will halt a boot if chassis intrusion is detected, but I don't know if it will shutdown
+	on a detected chassis intrusion after boot.~~ Neither.
 	- If not, then I need to create a service to do so.
 - [ ] Kernel modules
 	- It'd probably be a good idea to blacklist certain modules
