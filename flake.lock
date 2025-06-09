@@ -26,17 +26,14 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1749065334,
-        "narHash": "sha256-JGT8bj+HrCPD68tZKdvDU3TPgW40Uau/N3NWaffF6Gw=",
-        "ref": "refs/heads/main",
-        "rev": "18f7b53819459873cfbe9466b74b9fe9a5604774",
-        "revCount": 7,
-        "type": "git",
-        "url": "file:///nix/persist/colors"
+        "lastModified": 1749065355,
+        "narHash": "sha256-D2BA/OfjT/qevDYNmZfv8RS8+ZfxwXR05ap1d3N6QhE=",
+        "path": "/nix/persist/colors",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "file:///nix/persist/colors"
+        "path": "/nix/persist/colors",
+        "type": "path"
       }
     },
     "crane": {
@@ -380,17 +377,14 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1749423320,
-        "narHash": "sha256-e/7Vo11jE3j1Uyd9xObKwtvscTzACL78IEQLR765iqw=",
-        "ref": "refs/heads/main",
-        "rev": "2505676abc02f62a68d14674d12bd8b91671d2f2",
-        "revCount": 3,
-        "type": "git",
-        "url": "file:///nix/persist/secrets"
+        "lastModified": 1749423324,
+        "narHash": "sha256-vx1JUPke/HlDtQHwx6jugohz0kGtkRbLHESepwML4qY=",
+        "path": "/nix/persist/secrets",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "file:///nix/persist/secrets"
+        "path": "/nix/persist/secrets",
+        "type": "path"
       }
     },
     "systems": {
