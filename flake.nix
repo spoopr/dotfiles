@@ -5,7 +5,7 @@
 		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 		impermanence.url = "github:nix-community/impermanence";
 		lanzaboote = {
-			url = "github:nix-community/lanzaboote/v0.4.1";
+			url = "github:nix-community/lanzaboote/v0.4.2";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		secrets.url = "/nix/persist/secrets";
