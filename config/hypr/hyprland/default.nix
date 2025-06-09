@@ -7,7 +7,12 @@
 	wrapperlandConfig = builtins.toFile "wrapperlandConfig" (''
 		$primaryColor = rgb(${builtins.substring 1 (-1) colors.lavendar.hex})
 		$secondaryColor = rgb(${builtins.substring 1 (-1) colors.black.hex})
-	'' + (builtins.readFile ./hyprland.conf)
+
+		source=${./binds.conf}
+		source=${./meta.conf}
+		source=${./general.conf}
+		source=${./setup.conf}
+	''
 	);
 
 	wrapperland = (pkgs.symlinkJoin {
