@@ -5,8 +5,8 @@
 }: let
 
 	wrapperlandConfig = builtins.toFile "wrapperlandConfig" (''
-		$primaryColor = rgb(${builtins.substring 1 (-1) colors.lavendar.hex})
-		$secondaryColor = rgb(${builtins.substring 1 (-1) colors.black.hex})
+		$primaryColor = rgb(${colors.lavendar.hexNoHash})
+		$secondaryColor = rgb(${colors.black.hexNoHash})
 
 		source=${./binds.conf}
 		source=${./meta.conf}
