@@ -33,7 +33,10 @@ in {
 			(pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped config)
 		];
 
-		variables.EDITOR = "nvim";
+		variables = {
+			EDITOR = "nvim";
+			MANPAGER = "nvim +Man!";
+		};
 	};
 
 	programs.nano.enable = false;
