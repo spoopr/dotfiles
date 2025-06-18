@@ -8,7 +8,7 @@
 		$primaryColor = rgb(${colors.lavendar.hexNoHash})
 		$secondaryColor = rgb(${colors.black.hexNoHash})
 
-		source=${./binds.conf}
+		source=${./input.conf}
 		source=${./meta.conf}
 		source=${./general.conf}
 		source=${./setup.conf}
