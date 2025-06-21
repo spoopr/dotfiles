@@ -36,7 +36,6 @@
 		};
 	};
 
-
 in {  
 
 	environment.systemPackages = with pkgs; [
@@ -81,6 +80,12 @@ in {
 			useTmpfs = true;
 		};
 
+		# enable zswap
+		kernelParams = [
+			"zswap.enabled=1"
+			"zswap.compressor=lz4" # apparently the fastest algorithm
+			"zswap.max_pool_percent=20" # might wanna tune this value later
+		];
 	};
 
 	environment = {

@@ -98,7 +98,8 @@ please, let me know.
 	- [ ] Enable additional entropy modules?
 - [ ] General kernel and boot hardening
 - [ ] Restrict access on important directories
-- [ ] Zram / Zswap to reduce the chance of swapping important data
+- [x] ~~Zram~~ / Zswap to reduce the chance of swapping important data
+    - [ ] For an extra step, it would probably be good to also wipe all swap on shutdown
 - [ ] Encrypted swap partition
 - [ ] Isolate / restrict USB and other ports
 - [ ] Harden / anonymize wireless connections
