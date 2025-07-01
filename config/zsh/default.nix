@@ -6,6 +6,7 @@
   zshrc = pkgs.writeShellScriptBin ".zshrc" ''
     source ${./config.zsh}
 	source ${./autocomplete.zsh}
+	source ${./aliases.zsh}
   '';
 
 in {

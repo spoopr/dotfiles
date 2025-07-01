@@ -6,4 +6,4 @@ autoload -U compinit; compinit
 # :completion:[function]:[completer]:[command]:[argument]:[tag]
 
 # set completers
-zstyle ':completion:*' completer _extensions _complete _correct
+zstyle ':completion:*' completer  _complete _list _approximate
