@@ -1,7 +1,10 @@
 {
   lib,
+  inputs,
   ...
-}: {
+}: let
+    inherit (inputs) self;
+in {
     nix = {
         settings = {
             experimental-features = [
@@ -26,4 +29,8 @@
     };
 
     environment.defaultPackages = lib.mkForce [];
+
+    system.nixos.label = builtins.trace
+        (self.shortRev or self.dirtyShortRev)
+        (throw "hahafd");
 }
