@@ -1,9 +1,9 @@
 {
   ...
 }: {
-	programs.ssh = {
-		enableAskPassword = true;
+    programs.ssh = {
+        enableAskPassword = true;
 
-		startAgent = true;
-	};
-}	
+        startAgent = true;
+    };
+}   

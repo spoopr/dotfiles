@@ -5,8 +5,8 @@
 
   zshrc = pkgs.writeShellScriptBin ".zshrc" ''
     source ${./config.zsh}
-	source ${./autocomplete.zsh}
-	source ${./aliases.zsh}
+    source ${./autocomplete.zsh}
+    source ${./aliases.zsh}
   '';
 
 in {
@@ -17,7 +17,7 @@ in {
       paths = [ pkgs.zsh ];
       buildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
-	wrapProgram $out/bin/zsh --set ZDOTDIR "${zshrc}/bin"
+    wrapProgram $out/bin/zsh --set ZDOTDIR "${zshrc}/bin"
       '';
     })
   ];

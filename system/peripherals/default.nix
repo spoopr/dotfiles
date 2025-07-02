@@ -1,8 +1,8 @@
 {
   ...
 }: {
-	boot.kernelModules = [
-		# usb support
-		"usbhid"	
-	];
+    boot.kernelModules = [
+        # usb support
+        "usbhid"    
+    ];
 }

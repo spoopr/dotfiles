@@ -2,12 +2,12 @@
   pkgs,
   ...
 }: let
-	enhancedEnchantment = pkgs.callPackage ./enhancedEnchantment {};
+    enhancedEnchantment = pkgs.callPackage ./enhancedEnchantment {};
 
 in {
-	fonts = {
-		packages = [
-			enhancedEnchantment
-		];
-	};
+    fonts = {
+        packages = [
+            enhancedEnchantment
+        ];
+    };
 }

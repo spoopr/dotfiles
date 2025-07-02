@@ -2,7 +2,7 @@
   pkgs,
   ...
 }: {
-	environment.systemPackages = with pkgs; [
-		glow
-	];
+    environment.systemPackages = with pkgs; [
+        glow
+    ];
 }
