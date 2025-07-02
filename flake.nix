@@ -19,8 +19,6 @@
         moduleConfiguration = import ./config;
 
         mkConfig =  name: host: nixpkgs.lib.nixosSystem {
-            inherit (host) system;
-
             modules = host.hardwareModules 
             ++ (with inputs; [
                 impermanence.nixosModules.impermanence
@@ -29,10 +27,16 @@
 
                 moduleConfiguration
                 systemConfiguration
+
+                { 
+                    nixpkgs = {
+                        hostPlatform = host.system;
+                        pkgs = nixpkgs.legacyPackages.${host.system}; 
+                    };
+                }
             ]);
 
             specialArgs = {
-                pkgs = nixpkgs.legacyPackages.${host.system};
                 inherit inputs;
                 host = host // { inherit name; };
                 secrets = inputs.secrets.hostSecrets.${name};
