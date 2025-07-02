@@ -2,6 +2,10 @@
   ...
 }: {
     boot = {
+        initrd.kernelModules = [
+            "lz4"
+        ];
+
         kernelParams = [
             "zswap.enabled=1"
             "zswap.compressor=lz4" # apparently the fastest algorithm
