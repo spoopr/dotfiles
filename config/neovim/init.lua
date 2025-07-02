@@ -5,8 +5,8 @@ vim.opt.number = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
--- don't convert tabs
-vim.opt.expandtab = false
+-- do convert tabs
+vim.opt.expandtab = true
 
 -- keep diagnostics gutter open
 vim.opt.signcolumn = "yes"
