@@ -8,11 +8,20 @@ vim.opt.shiftwidth = 4
 -- do convert tabs
 vim.opt.expandtab = true
 
+-- mark all text beyond 80 characters wide
+vim.cmd 'highlight ColorColumn guifg=NvimDarkGrey4 guibg=NONE'
+vim.cmd "call matchadd('ColorColumn', '\\%>80v', 100)"
+
 -- keep diagnostics gutter open
 vim.opt.signcolumn = "yes"
 
 -- leap
 require('leap').create_default_mappings()
+
+-- show lsp messages
+vim.diagnostic.config({
+    virtual_text = true,
+})
 
 -- treesitter
 require('nvim-treesitter.configs').setup({
