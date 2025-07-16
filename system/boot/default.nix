@@ -37,7 +37,8 @@
             directories = [
                 "/etc/nixos"
                 "/srv"
-                "/var/lib"
+                "/var/lib/nixos"
+                "/var/lib/systemd"
                 "/var/log"
             ];
         };
