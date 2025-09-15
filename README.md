@@ -82,8 +82,8 @@ My daily use laptop, a pretty endgame spec AMD Framework 13.
 
 
 ## Security / Privacy
-This is more for myself, as a to-do and a to-done. If you think there's any possible vectors or attack types I'm missing,
-please, let me know.
+This is more for myself, as a to-do and a to-done. If you think there's anything listed incorrectly or is excessively 
+(even for me) paranoid, please, let me know.
 ## 
 
 - [x] Evil maid attacks
@@ -92,7 +92,7 @@ please, let me know.
 - [ ] DMA attacks
 	- ~~Supposedly the firmware in `awa` will halt a boot if chassis intrusion is detected, but I don't know if it will shutdown
 	on a detected chassis intrusion after boot.~~ Neither.
-	- If not, then I need to create a service to do so.
+	- If not, then I probably should create a service to do so.
 - [ ] Kernel modules
 	- It'd probably be a good idea to blacklist certain modules
 	- [ ] Enable additional entropy modules?
