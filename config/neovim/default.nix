@@ -35,7 +35,6 @@ in {
 
         variables = {
             EDITOR = "nvim";
-            MANPAGER = "nvim +Man!";
         };
     };
 
