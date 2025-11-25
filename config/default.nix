@@ -12,5 +12,6 @@
         ./protonPass
         ./zsh
         ./glow
+        ./marp
     ];
 }
