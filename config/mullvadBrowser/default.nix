@@ -3,9 +3,11 @@
   ...
 }: let
     placeProfile = pkgs.writeScript "placeMullvadBrowserProfile" ''
-        mkdir -p ~/.mullvad/mullvadbrowser/profile
-        cp -r ${./profile}/* ~/.mullvad/mullvadbrowser/profile
-        chmod +w -R ~/.mullvad/mullvadbrowser/profile
+        if [ ! -d ~/.mullvad/mullvadbrowser/profile ]; then
+            mkdir -p ~/.mullvad/mullvadbrowser
+            tar -xf ${./profile.tar.gz} -C ~/.mullvad/mullvadbrowser/
+            chmod +w -R ~/.mullvad/mullvadbrowser/profile
+        fi
     '';
 
     wrappervad-browser = (pkgs.symlinkJoin {
