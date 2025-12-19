@@ -7,14 +7,16 @@
             :luafile ${./init.lua}
         '';
         plugins = with pkgs.vimPlugins; [
-            nvim-treesitter.withAllGrammars
-            leap-nvim
+            # lsp
+            nvim-lspconfig
 
             # autocomplete
             nvim-cmp
-            nvim-lspconfig
             cmp-buffer
             cmp-nvim-lsp
+
+            # other
+            leap-nvim
         ];
     };
 

@@ -23,12 +23,6 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
--- treesitter
-require('nvim-treesitter.configs').setup({
-	highlight = {
-		enable = true,
-	},
-})
 -- autocomplete
 local cmp = require('cmp')
 cmp.setup({
