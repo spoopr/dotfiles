@@ -9,7 +9,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         secrets.url = "/nix/persist/secrets";
-        colors.url = "/nix/persist/colors";
+        colors.url = "github:spoopr/lavndr";
     };
 
     outputs = { nixpkgs, ... } @ inputs: let

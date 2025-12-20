@@ -26,14 +26,17 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1749860271,
-        "narHash": "sha256-WUlKHbgNbxe7ulwtxJ17sp/4py5xVU8OwgsPrzgkdPw=",
-        "path": "/nix/persist/colors",
-        "type": "path"
+        "lastModified": 1766196362,
+        "narHash": "sha256-I0bioG1afyquwvJpdEaLgme9ee7GyTa/Ugpt2OUrvUo=",
+        "owner": "spoopr",
+        "repo": "lavndr",
+        "rev": "6b8f453930bbcb512c1ff5009c3152adf8c456ad",
+        "type": "github"
       },
       "original": {
-        "path": "/nix/persist/colors",
-        "type": "path"
+        "owner": "spoopr",
+        "repo": "lavndr",
+        "type": "github"
       }
     },
     "crane": {
