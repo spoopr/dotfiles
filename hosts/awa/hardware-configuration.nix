@@ -16,7 +16,7 @@
   fileSystems."/" =
     { device = "none";
       fsType = "tmpfs";
-      options = [ "size=32G" "umask=022" ];
+      options = [ "size=32G" "mode=755" ];
     };
 
   fileSystems."/boot" =
