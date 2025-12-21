@@ -91,17 +91,23 @@ vim.opt.pumheight = 5
 
 -- lsp setup
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
 
-lspconfig.jdtls.setup({
+vim.lsp.config("jdtls", {
 	capabilities = capabilities
 })
-lspconfig.lua_ls.setup({
+vim.lsp.enable("jdtls")
+
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities
 })
-lspconfig.nixd.setup({
+vim.lsp.enable("lua_ls")
+
+vim.lsp.config("nixd", {
 	capabilities = capabilities
 })
-lspconfig.ts_ls.setup({
+vim.lsp.enable("nixd")
+
+vim.lsp.config("ts_ls", {
 	capabilities = capabilities
 })
+vim.lsp.enable("ts_ls")

@@ -12,7 +12,6 @@
 
             # autocomplete
             nvim-cmp
-            nvim-lspconfig
             cmp-buffer
             cmp-nvim-lsp
         ];
