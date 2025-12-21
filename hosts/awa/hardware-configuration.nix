@@ -16,13 +16,13 @@
   fileSystems."/" =
     { device = "none";
       fsType = "tmpfs";
-      options = [ "size=32G" ];
+      options = [ "size=32G" "umask=022" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/A07B-B7EB";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "umask=0077" ];
     };
 
   fileSystems."/nix" =
