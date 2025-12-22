@@ -17,11 +17,13 @@
         plugins = with pkgs.vimPlugins; [
             nvim-treesitter.withAllGrammars
             leap-nvim
+            bullets-vim
 
             # autocomplete
             nvim-cmp
             cmp-buffer
             cmp-nvim-lsp
+
         ];
     };
 
