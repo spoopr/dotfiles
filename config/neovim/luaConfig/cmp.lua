@@ -54,6 +54,7 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'buffer' },
+        { name = 'treesitter' },
 	}),
 })
 -- only show 5 options in popup menu

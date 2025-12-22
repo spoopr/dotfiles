@@ -23,7 +23,7 @@
             nvim-cmp
             cmp-buffer
             cmp-nvim-lsp
-
+            cmp-treesitter
         ];
     };
 
