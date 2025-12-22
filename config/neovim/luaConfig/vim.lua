@@ -14,3 +14,6 @@ vim.cmd "call matchadd('ColorColumn', '\\%>80v', 100)"
 
 -- keep diagnostics gutter open
 vim.opt.signcolumn = "yes"
+
+-- keep cursor away from the edges of the screen
+vim.opt.scrolloff = 15
