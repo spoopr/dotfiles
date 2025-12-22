@@ -1,11 +1,19 @@
 {
   pkgs,
+  lib,
   ...
 }: let 
     config = pkgs.neovimUtils.makeNeovimConfig {
-        customRC = ''
-            :luafile ${./init.lua}
-        '';
+	customRC = [
+	    ./luaConfig/vim.lua
+	    ./luaConfig/lsp.lua
+	    ./luaConfig/cmp.lua
+	    ./luaConfig/treesitter.lua
+	    ./luaConfig/leap.lua
+	]
+	    |> builtins.map (file: ":luafile ${file}")
+	    |> lib.strings.concatStringsSep "\n";
+
         plugins = with pkgs.vimPlugins; [
             nvim-treesitter.withAllGrammars
             leap-nvim
