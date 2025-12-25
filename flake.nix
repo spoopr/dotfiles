@@ -8,7 +8,7 @@
             url = "github:nix-community/lanzaboote/v0.4.2";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        secrets.url = "/nix/persist/secrets";
+        secrets.url = "/nix/persist/repos/secrets";
         colors.url = "github:spoopr/lavndr";
     };
 
