@@ -14,7 +14,7 @@
             inputs.lanzaboote.nixosModules.lanzaboote
             {
                 options = {
-                    inherit (options) services systemd;
+                    inherit (options) services systemd assertions environment;
                     boot = { inherit (options.boot) bootspec loader kernelPackages; };
                 };
 
@@ -25,7 +25,7 @@
 
                         lanzaboote = builtins.removeAttrs
                             config.boot.lanzaboote
-                            [ "package" ];
+                            [ "package" "installCommand" ];
                     };
                 };
             }
