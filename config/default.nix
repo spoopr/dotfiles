@@ -12,5 +12,6 @@
         ./zsh
         ./glow
         ./marp
+        ./niri
     ];
 }
