@@ -17,3 +17,6 @@ vim.opt.signcolumn = "yes"
 
 -- keep cursor away from the edges of the screen
 vim.opt.scrolloff = 15
+
+-- don't softwrap
+vim.opt.wrap = false
