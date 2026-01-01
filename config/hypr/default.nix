@@ -1,9 +1,0 @@
-{
-  ...
-}: {
-    imports = [
-        ./hyprland
-        ./hyprpaper
-        ./hyprlock
-    ];
-}
