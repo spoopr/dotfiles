@@ -7,7 +7,7 @@
         ./hypr
         ./foot
         ./mullvadBrowser
-        ./neovim
+        ./nvim
         ./tor
         ./protonPass
         ./zsh
