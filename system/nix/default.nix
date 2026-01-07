@@ -47,4 +47,8 @@ in {
             shorts=("${nixos.label}")
         '' + builtins.readFile ./autoremove.sh;
     };
+
+
+    # add development man/info/other pages
+    documentation.dev.enable = true;
 }
