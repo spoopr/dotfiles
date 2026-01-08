@@ -13,5 +13,6 @@
         ./glow
         ./marp
         ./niri
+        ./swaylock
     ];
 }
