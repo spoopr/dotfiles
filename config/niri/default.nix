@@ -8,14 +8,16 @@
         buildInputs = [ pkgs.makeWrapper ];
         postBuild = ''
             wrapProgram $out/bin/niri \
-                --add-flags "-c ${./config.kdl}"
+                --set "NIRI_CONFIG" "${./config.kdl}"
         '';
     };
 in {
     environment.systemPackages = [
         niriWrapped
         pkgs.xwayland-satellite
-    ];
+    ] ++ (with pkgs; [
+        jq
+    ]);
 
     xdg.portal = {
         enable = true;

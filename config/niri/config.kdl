@@ -30,7 +30,7 @@ input {
 }
 
 cursor {
-    hide-after-inactive-ms 250
+    hide-after-inactive-ms 200
 }
 
 // run `niri msg outputs` in a niri instance to find monitors
@@ -60,10 +60,6 @@ layout {
     gaps 16
     center-focused-column "never"
 
-    preset-column-widths {
-        proportion 1.0;
-        proportion 0.5;
-    }
     preset-window-heights { 
         proportion 1.0;
         proportion 0.5;
@@ -177,16 +173,31 @@ animations {
     clip-to-geometry true
 }
 
+recent-windows {
+    off
+}
+
 binds {
-    Super+Q { spawn "foot"; }
+    Mod+Q { spawn "foot"; }
+    // oh babey one liners
+    // there's some ambiguity with what shell type `spawn` runs under, so i'm
+    // locking it under zsh
+    Mod+Shift+Q { spawn "zsh" "-c" "foot -D $(CHILDREN=(${(f)\"$(pgrep -P $(niri msg --json focused-window | jq .pid))\"}); if [ ${#CHILDREN} -eq 1 ]; then echo $(pwdx $CHILDREN[1] | cut -d \" \" -f 2); else echo \"~\"; fi)";}
     Mod+A repeat=false { close-window; }
 
-    Super+Escape  { spawn "swaylock"; }
+    Mod+Escape  { spawn "swaylock"; }
+    
+    // extra don't wanna do this by accident
+    Mod+Shift+Ctrl+Escape { quit; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "zsh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "zsh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    // fine adjustment
+    Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+ -l 1.0"; }
+    Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01-"; }
+    // mutes
+    XF86AudioMute allow-when-locked=true { spawn "zsh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute allow-when-locked=true { spawn "zsh" "-c" "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     XF86MonBrightnessUp allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set +5%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set 5%-"; }
@@ -194,34 +205,38 @@ binds {
     Shift+XF86MonBrightnessUp allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set +1%"; }
     Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set 1%-"; }
 
-    Mod+Tab repeat=false { toggle-overview; }
+    Mod+Tab { toggle-overview; }
 
 
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
 
-    Mod+Shift+H     { move-column-left; }
-    Mod+Shift+J     { move-window-down; }
-    Mod+Shift+K     { move-window-up; }
-    Mod+Shift+L     { move-column-right; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+L { move-column-right; }
 
     Mod+Comma  { consume-or-expel-window-left; }
     Mod+Period { consume-or-expel-window-right; }
 
-    Mod+C { switch-preset-column-width; }
-    Mod+Shift+C { maximize-window-to-edges; }
-    Mod+Shift+Ctrl+C { fullscreen-window; }
+    Mod+C { maximize-window-to-edges; }
+    Mod+Ctrl+C { fullscreen-window; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Equal { set-column-width "50%"; }
+
+    Mod+BracketLeft { set-window-height "-10%"; }
+    Mod+BracketRight { set-window-height "+10%"; }
+    Mod+Shift+BracketRight { set-window-height "100%"; }
 
     Mod+W { focus-workspace-down; }
     Mod+S { focus-workspace-up; }
     Mod+Shift+W { move-window-to-workspace-down; }
-    Mod+Shift+S   { move-window-to-workspace-up; }
+    Mod+Shift+S { move-window-to-workspace-up; }
 
-    Mod+Ctrl+W         { move-workspace-down; }
-    Mod+Ctrl+S         { move-workspace-up; }
+    Mod+Ctrl+W { move-workspace-down; }
+    Mod+Ctrl+S { move-workspace-up; }
 }
