@@ -15,6 +15,7 @@
                 gpg.format = "ssh";
                 commit.gpgSign = true;
                 tag.gpgSign = true;
+                clean.requireForce = false;
             };
         };
 
