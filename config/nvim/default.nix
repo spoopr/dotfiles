@@ -37,6 +37,7 @@ in {
             lua-language-server
             nixd
             typescript-language-server
+            clang-tools # clangd's in here
 
             # copy / paste
             wl-clipboard

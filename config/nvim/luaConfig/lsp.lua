@@ -38,3 +38,11 @@ vim.lsp.config('ts_ls', {
     root_markers = { '.git' },
 })
 vim.lsp.enable('ts_ls')
+
+vim.lsp.config('clangd', {
+    cmd  = { 'clangd' },
+    capabilities = capabilities,
+    filetypes = { 'c', 'cpp', 'h'},
+    root_markers = { '.git' }
+})
+vim.lsp.enable('clangd')
