@@ -33,6 +33,12 @@ cursor {
     hide-after-inactive-ms 200
 }
 
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 // run `niri msg outputs` in a niri instance to find monitors
 output "eDP-1" {
     mode "2880x1920@120.030"
