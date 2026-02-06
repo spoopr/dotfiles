@@ -11,6 +11,7 @@
 	    ./luaConfig/treesitter.lua
 	    ./luaConfig/leap.lua
         ./luaConfig/indent-blankline.lua
+        ./luaConfig/autoclose.lua
 	]
 	    |> builtins.map (file: ":luafile ${file}")
 	    |> lib.strings.concatStringsSep "\n";
@@ -20,6 +21,7 @@
             leap-nvim
             bullets-vim
             indent-blankline-nvim
+            autoclose-nvim
 
             # autocomplete
             nvim-cmp
