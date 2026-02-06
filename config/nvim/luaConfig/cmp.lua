@@ -36,8 +36,24 @@ cmp.setup({
 				end
 			end
 		),
-		['<A-l>'] = cmp.mapping.open_docs(),
-		['<A-h>'] = cmp.mapping.close_docs(),
+		['<A-l>'] = cmp.mapping(
+            function()
+                if cmp.visible_docs() then
+                    cmp.open_docs()
+                else
+                    -- do nothing
+                end
+            end
+        ),
+		['<A-h>'] = cmp.mapping(
+            function()
+                if cmp.visible_docs() then
+                    cmp.close_docs()
+                else
+                    -- do nothing
+                end
+            end
+        ),
 		['<A-CR>'] = cmp.mapping.confirm({ select = true }),
 		['<A-Esc>'] = cmp.mapping(
 			function(fallback)
