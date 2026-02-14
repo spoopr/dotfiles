@@ -27,3 +27,14 @@ vim.opt.scrolloff = 15
 
 -- don't softwrap
 vim.opt.wrap = false
+
+-- highlight trailing whitespace
+vim.cmd 'match ExtraWhitespace /\\s\\+$/'
+vim.api.nvim_set_hl(
+    0,
+    "ExtraWhitespace",
+    {
+        fg = "NvimLightRed",
+        underline = true
+    }
+)
