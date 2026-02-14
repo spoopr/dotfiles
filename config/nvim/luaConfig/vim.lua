@@ -9,8 +9,15 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- mark all text beyond 80 characters wide
-vim.cmd 'highlight ColorColumn guifg=NvimDarkGrey4 guibg=NONE'
-vim.cmd "call matchadd('ColorColumn', '\\%>80v', 100)"
+vim.cmd "call matchadd('OverwideText', '\\%>80v', 100)"
+vim.api.nvim_set_hl(
+    0,
+    "OverwideText",
+    {
+        bg = "NONE",
+        fg = "NvimDarkGrey4"
+    }
+)
 
 -- keep diagnostics gutter open
 vim.opt.signcolumn = "yes"
