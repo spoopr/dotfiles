@@ -16,6 +16,7 @@
                 commit.gpgSign = true;
                 tag.gpgSign = true;
                 clean.requireForce = false;
+                pull.rebase = false;
             };
         };
 
