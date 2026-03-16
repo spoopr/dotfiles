@@ -12,6 +12,7 @@
 	    ./luaConfig/leap.lua
         ./luaConfig/indent-blankline.lua
         ./luaConfig/autoclose.lua
+        ./luaConfig/gitsigns.lua
 	]
 	    |> builtins.map (file: ":luafile ${file}")
 	    |> lib.strings.concatStringsSep "\n";
@@ -22,6 +23,7 @@
             bullets-vim
             indent-blankline-nvim
             autoclose-nvim
+            gitsigns-nvim
 
             # autocomplete
             nvim-cmp
