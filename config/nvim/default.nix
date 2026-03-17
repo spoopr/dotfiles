@@ -24,6 +24,7 @@
             indent-blankline-nvim
             autoclose-nvim
             gitsigns-nvim
+            fidget-nvim
 
             # autocomplete
             nvim-cmp

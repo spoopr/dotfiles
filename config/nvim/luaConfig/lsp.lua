@@ -6,6 +6,16 @@ vim.diagnostic.config({
 -- setup
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- -- get lsp notifications
+local fidget = require('fidget')
+fidget.setup({
+    progress = {
+        display = {
+            done_icon = "[x]",
+            progress_icon = {"line"}
+        }
+    }
+})
 -- -- enable all the servers
 vim.lsp.config('jdtls', {
     cmd = { 'jdtls' },
