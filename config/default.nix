@@ -14,5 +14,6 @@
         ./marp
         ./niri
         ./swaylock
+        ./ly
     ];
 }
