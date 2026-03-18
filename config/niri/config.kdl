@@ -47,18 +47,6 @@ output "eDP-1" {
     transform "normal"
     focus-at-startup
 
-    // x was set to 1280 by default and i don't know why so I'm leaving the 
-    // original comment
-    //
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
     position x=0 y=0
 }
 
@@ -87,6 +75,7 @@ layout {
 
     // You can change how the focus ring looks.
     focus-ring {
+        off
         width 4
 
         // Colors can be set in a variety of ways:
@@ -95,7 +84,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         active-color "#7fc8ff"
-        inactive-color "#505050"
+        inactive-color "#ffffff"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -115,7 +104,6 @@ layout {
 
     // You can also add a border. It's similar to the focus ring, but always visible.
     border {
-        off
 
         width 4
         active-color "#ffc87f"
@@ -135,15 +123,9 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
-// You can change the path where screenshots are saved.
-// A ~ at the front will be expanded to the home directory.
-// The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
-// You can also set this to null to disable saving screenshots to disk.
-// screenshot-path null
+screenshot-path null
 
 // Animation settings.
 // The wiki explains how to configure individual animations:
