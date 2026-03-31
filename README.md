@@ -115,7 +115,7 @@ let me know.
         - I didn't realize it until now, but if swap is encrypted with a
         random key (the way its usually done), it becomes effectively 
         unrecoverable on shutdown
-- [ ] Encrypted swap partition
+- [x] Encrypted swap partition
 - [ ] Isolate / restrict USB and other ports
 - [ ] Harden / anonymize wireless connections
     - [x] `dhcpcd` is configured with the `anonymous` flag, which implements
