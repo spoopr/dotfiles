@@ -124,6 +124,7 @@ let me know.
       [RFC 7488](https://datatracker.ietf.org/doc/html/rfc7488)
 - [ ] Implement an official ProtonVPN app
 	- To allow for much easier / automatic rotation of VPN host servers
+- [X] Whonix machine id
 
 
 <br />
