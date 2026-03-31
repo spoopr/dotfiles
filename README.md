@@ -106,7 +106,9 @@ let me know.
 	- If not, then I probably should create a service to do so.
 - [ ] Kernel modules
 	- It'd probably be a good idea to blacklist certain modules
-	- [ ] Enable additional entropy modules?
+    ~~- [ ] Enable additional entropy modules?~~ Additional entropy can be
+    gained through audio or visual data. For my purposes, these are not 
+    available.
 - [ ] General kernel and boot hardening
 - [ ] Restrict access on important directories
 - [x] ~~Zram~~ / Zswap to reduce the chance of swapping important data
