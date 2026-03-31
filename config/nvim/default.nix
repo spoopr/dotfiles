@@ -13,6 +13,7 @@
         ./luaConfig/indent-blankline.lua
         ./luaConfig/autoclose.lua
         ./luaConfig/gitsigns.lua
+        ./luaConfig/bullets.lua
 	]
 	    |> builtins.map (file: ":luafile ${file}")
 	    |> lib.strings.concatStringsSep "\n";
