@@ -112,7 +112,7 @@ let me know.
 - [ ] General kernel and boot hardening
 - [ ] Restrict access on important directories
 - [x] ~~Zram~~ / Zswap to reduce the chance of swapping important data
-    - [ ] For an extra step, it would probably be good to also wipe all ~~swap~~
+    - [-] For an extra step, it would probably be good to also wipe all ~~swap~~
     ram on shutdown
         - I didn't realize it until now, but if swap is encrypted with a
         random key (the way its usually done), it becomes effectively 
