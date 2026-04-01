@@ -3,7 +3,7 @@
   ...
 }: {
     fonts.packages = [
-        pkgs.stdenv.mkDerivation {
+        (pkgs.stdenv.mkDerivation {
             pname = "enhanced-enchantment";
             version = "1.0";
             src = ./.;
@@ -12,6 +12,6 @@
                 mkdir -p $out/share/fonts/truetype/
                 cp $src/enhancedEnchantment.ttf $out/share/fonts/truetype/
                 '';
-        }
+        })
     ];
 }
