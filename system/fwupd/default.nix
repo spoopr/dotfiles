@@ -2,4 +2,4 @@
   ...
 }: {
     services.fwupd.enable = true;
-}   
+}

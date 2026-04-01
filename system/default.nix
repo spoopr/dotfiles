@@ -2,16 +2,25 @@
   ...
 }: {
     imports = [
-        ./boot
-        ./nix
-        ./security
+        ./audit
+        ./autoremove
+        ./dhcpcd
+        ./fwupd
+        ./grub
+        ./impermanence
+        ./iwd
+        ./kernel
+        ./lanzaboote
+        ./luks
         ./network
-        ./firmware
+        ./nix
+        ./openvpn
+        ./pipewire
+        ./sudo
+        ./usb
         ./users
-        ./fonts
-        ./peripherals
-        ./audio
-        ./display
+        ./wireguard
+        ./zswap
     ];
 
     time.timeZone = "America/Chicago";
