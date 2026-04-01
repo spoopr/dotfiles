@@ -21,6 +21,8 @@
         ./users
         ./wireguard
         ./zswap
+        ./git
+        ./ssh
     ];
 
     time.timeZone = "America/Chicago";

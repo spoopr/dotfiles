@@ -2,18 +2,17 @@
   ...
 }: {
     imports = [
-        ./git
-        ./ssh
+        ./brightnessctl
+        ./enchantment
         ./foot
-        ./mullvadBrowser
-        ./nvim
-        ./tor
-        ./protonPass
-        ./zsh
-        ./glow
-        ./marp
-        ./niri
-        ./swaylock
+        ./git
         ./ly
+        ./mullvad
+        ./niri
+        ./nvim
+        ./pass
+        ./swaylock
+        ./tor
+        ./zsh
     ];
 }
