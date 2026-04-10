@@ -14,8 +14,8 @@ in {
                 "pipe-operators"
             ];
 
-            allowed-users = [ "@wheel" ];
-            trusted-users = [ "@wheel" ];
+            allowed-users = [ "root" ];
+            trusted-users = [ "root" ];
 
             warn-dirty = false;
             sandbox = true;
