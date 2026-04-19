@@ -3,6 +3,8 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+        nix-index-database.url = "github:nix-community/nix-index-database";
         
         nixos-hardware.url = "github:nixos/nixos-hardware";
 

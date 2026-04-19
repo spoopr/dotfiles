@@ -12,6 +12,7 @@
         ./peripherals
         ./audio
         ./display
+        ./comma
     ];
 
     time.timeZone = "America/Chicago";
