@@ -5,7 +5,7 @@
 }: let
     configuration = builtins.toFile "wroop" (
         ''
-            [colors]
+            [colors-dark]
             foreground=${colors.white.hexNoHash}
             background=${colors.black.hexNoHash}
 
