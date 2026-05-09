@@ -1,47 +1,32 @@
 {
-    description = "augh";
-
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-        impermanence.url = "github:nix-community/impermanence";
-        lanzaboote. url = "github:nix-community/lanzaboote/v1.0.0";
+
         secrets.url = "/nix/persist/repos/secrets";
         colors.url = "github:spoopr/lavndr";
+
+        impermanence.url = "github:nix-community/impermanence";
+
+        inputs.import-tree.url = "github:vic/import-tree";
+        inputs.flake-parts.url = "github:hercules-ci/flake-parts";
     };
 
-    outputs = { nixpkgs, ... } @ inputs: let
+    outputs = {
+        flake-parts,
+        ...
+    } @ inputs: flake-parts.lib.mkFlake
+        { inherit inputs; }
+        {
+            systems = [
+                "x86_64-linux"
+            ];
 
-        hosts = import ./hosts inputs;
-        systemConfiguration = import ./system;
-        moduleConfiguration = import ./config;
-
-        mkConfig =  name: host: nixpkgs.lib.nixosSystem {
-            modules = host.hardwareModules 
-            ++ (with inputs; [
-                impermanence.nixosModules.impermanence
-                lanzaboote.nixosModules.lanzaboote
-                secrets.nixosModules.${name}
-
-                moduleConfiguration
-                systemConfiguration
-
-                { 
-                    nixpkgs = {
-                        hostPlatform = host.system;
-                        pkgs = nixpkgs.legacyPackages.${host.system}; 
-                    };
-                }
-            ]);
-
-            specialArgs = {
-                inherit inputs;
-                host = host // { inherit name; };
-                secrets = inputs.secrets.hostSecrets.${name};
-                inherit (inputs.colors) colors;
-            };
+            imports = [
+                ./hosts
+                ./system
+                ./config
+                ./tools
+            ];
         };
 
-    in {  
-        nixosConfigurations =  builtins.mapAttrs mkConfig hosts;
-    };
 }

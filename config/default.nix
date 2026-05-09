@@ -1,18 +1,6 @@
 {
+  import-tree,
   ...
 }: {
-    imports = [
-        ./brightnessctl
-        ./enchantment
-        ./foot
-        ./git
-        ./ly
-        ./mullvad
-        ./niri
-        ./nvim
-        ./pass
-        ./swaylock
-        ./tor
-        ./zsh
-    ];
+    imports = import-tree ./.;
 }
