@@ -60,7 +60,7 @@
             colormix_col3 = "0x00" + colors.white.hexNoHash;
 
             full_color = true;
-            battery_id = null;
+            battery_id = "BAT1";
             clock = null;
             edge_margin = 1;
             input_len = 34;
