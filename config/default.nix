@@ -15,5 +15,6 @@
         ./niri
         ./swaylock
         ./ly
+        ./firefox
     ];
 }
