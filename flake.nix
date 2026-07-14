@@ -23,7 +23,6 @@
 
             imports = [
                 ./hosts
-                ./system
                 ./config
                 ./tools
             ];
