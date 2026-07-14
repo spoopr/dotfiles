@@ -7,8 +7,8 @@
 
         impermanence.url = "github:nix-community/impermanence";
 
-        inputs.import-tree.url = "github:vic/import-tree";
-        inputs.flake-parts.url = "github:hercules-ci/flake-parts";
+        import-tree.url = "github:vic/import-tree";
+        flake-parts.url = "github:hercules-ci/flake-parts";
     };
 
     outputs = {
