@@ -1,12 +1,12 @@
 {
-  import-tree,
+  inputs,
   ...
-}: {
-    imports = [
-        (import-tree
-            |> (x: x.addPath ./.)
-            |> (x: x.match "default\\.nix")
-            |> (x: x.result)
-        )
-    ];
+}: let
+    inherit (inputs) import-tree;
+in {
+    imports = [ (import-tree
+        |> (x: x.match ".+\/default\.nix")
+        |> (x: x.addPath ./.)
+        |> (x: x.result)
+    ) ];
 }

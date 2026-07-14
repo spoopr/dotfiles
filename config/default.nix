@@ -1,10 +1,12 @@
 {
-  import-tree,
+  inputs,
   ...
 }: let
-    imports = import-tree ./.;
+    inherit (inputs) import-tree;
 in {
-    imports = builtins.trace
-        imports
-        imports;
+    imports = [ (import-tree
+        |> (x: x.match ".+\/default\.nix")
+        |> (x: x.addPath ./.)
+        |> (x: x.result)
+    ) ];
 }
