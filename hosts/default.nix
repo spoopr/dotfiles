@@ -27,6 +27,11 @@ in {
 
                         self.nixosModules.dotfiles
                     ];
+
+                    specialArgs = {
+                        inherit inputs;
+                    };
                 };
+
         });
 }
