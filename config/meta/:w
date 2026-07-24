@@ -26,8 +26,13 @@ in
             };
         };
 
-    config = let
-        filled = path
+    config = lib.merge [
+        (
+            lib.mkIf
+                (cfg.enable
+                    || config.dotfiles.meta.forceEnable.forComponents components
+                )
+                (path
                     |> import
                     |> (content: if (lib.isFunction content)
                         then content
@@ -40,33 +45,14 @@ in
                                 # dotfile-declared attributes
                                 dots = {
                                     inherit (current-flake-args) inputs;
-                                    inherit (config.dotfiles.meta) args;
+                                    args = {};
                                 };
                              }
                          |> import path
                          else content
-                    );
-    in lib.mkMerge [
-        # always include configuration under the `dotfiles` options
-        (if (builtins.hasAttr
-            "dotfiles"
-            filled
-        )
-            then { inherit (filled) dotfiles; }
-            else {}
-        )
-
-        (lib.mkIf
-            (cfg.enable
-                || config.dotfiles.meta.forceEnable.forComponents components
-            )
-            (filled
-                |> (content:
-                    removeAttrs
-                        content
-                        [ "dotfiles" ]
+                    )
+                    |> removeAttrs "dotfiles"
                 )
-            )
         )
     ];
 

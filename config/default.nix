@@ -17,7 +17,19 @@ in {
         # flake-parts scope
         { ... }:
         # nixos scope
-        { ... }: {
+        { ... }: let
+            # this lambda is assigned to standardize its function across files
+            pathToLabel = path: path
+                    |> lib.path.removePrefix ./.
+                    |> lib.path.subpath.components
+                    |> (list: [ "dotfiles" ] ++ list)
+                    |> (list: list
+                        |> builtins.length
+                        |> (length: length - 1)
+                        |> builtins.elemAt list
+                        |> (last: lib.remove last list)
+                    );
+        in {
             imports = (import-tree # get all the files
                     |> (x: x.match ".+\/default\.nix")
                     # `meta` keeps things imported by this file
@@ -28,15 +40,7 @@ in {
                 ) # take the paths and divide them into their components,
                 # relative to `config/`
                 |> map (path: path
-                    |> lib.path.removePrefix ./.
-                    |> lib.path.subpath.components
-                    |> (list: [ "dotfiles" ] ++ list)
-                    |> (list: list
-                        |> builtins.length
-                        |> (length: length - 1)
-                        |> builtins.elemAt list
-                        |> (last: lib.remove last list)
-                    )
+                    |> pathToLabel
                     |> (components: {
                         inherit
                             path
@@ -49,9 +53,18 @@ in {
                         inherit
                             path
                             components
-                            current-flake-args;
+                            current-flake-args
+                            pathToLabel;
                     }
                 );
+
+            options = import
+                ./meta/options.nix
+                {
+                    inherit
+                        current-flake-args
+                        pathToLabel;
+                };
         }
     );
 }
