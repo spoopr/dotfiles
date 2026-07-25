@@ -5,6 +5,7 @@
   config,
   options,
   inputs,
+  dots,
   ...
 }: let
     # preevaluate lanzaboote so we can pull boot.loader.external.installHook
@@ -37,6 +38,11 @@
     };
 
 in {
+
+    imports = with dots.inputs; [
+        lanzaboote.nixosModules.lanzaboote
+    ];
+
     # sbctl is used for the initial setup of secureboot
     environment.systemPackages = with pkgs; [
         sbctl
