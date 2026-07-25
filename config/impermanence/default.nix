@@ -1,6 +1,12 @@
 {
+  dots,
   ...
 }: {
+    imports = with dots.inputs; [
+        impermanence.nixosModules.impermanence
+    ];
+
+
     boot = {
         tmp = {
             cleanOnBoot = true;
