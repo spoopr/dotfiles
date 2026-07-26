@@ -25,6 +25,12 @@ in {
                     modules = [
                         host
 
+                        {
+                            dotfiles.meta.args = {
+                                inherit hostName;
+                            };
+                        }
+
                         self.nixosModules.dotfiles
                     ];
                 };

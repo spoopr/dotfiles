@@ -1,5 +1,4 @@
 {
-  secrets,
   pkgs,
   lib,
   config,
@@ -8,6 +7,8 @@
   dots,
   ...
 }: let
+    inherit (dots.args) secrets;
+
     # preevaluate lanzaboote so we can pull boot.loader.external.installHook
     # this is very possibly the worst way to do it
     evalaboote = lib.evalModules {
@@ -38,6 +39,8 @@
     };
 
 in {
+    dotfiles.args.secrets.enable = true;
+
 
     imports = with dots.inputs; [
         lanzaboote.nixosModules.lanzaboote
