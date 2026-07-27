@@ -2,6 +2,8 @@
   lib,
   ...
 }: {
+    dotfiles.meta.forceEnable = true;
+
     nix = {
         settings = {
             experimental-features = [
