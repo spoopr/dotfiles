@@ -77,8 +77,15 @@ in {
             )
             guarantees
         ) ++ [ (lib.mkIf
-            (cfg.enable
-                || config.dotfiles.meta.forceEnable.forComponents components
+            (
+                cfg.enable
+                || (components
+                    |> config.dotfiles.meta.forceEnable.forComponents
+                    |> (result: if (result != null)
+                        then result
+                        else false
+                    )
+                )
             )
             (removeAttrs
                 filled
