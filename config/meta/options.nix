@@ -17,7 +17,9 @@
                     file,
                     value
                 }: {
-                    file = pathToLabel file;
+                    file = file
+                        |> (x: /. + x)
+                        |> pathToLabel;
                     inherit value;
                 })
             |> (definitions: {
