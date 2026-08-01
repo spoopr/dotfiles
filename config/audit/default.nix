@@ -1,6 +1,8 @@
 {
   ...
 }: {
+    dotfiles.self.forceEnable = true;
+
     security = {
         auditd.enable = true;
         audit = {

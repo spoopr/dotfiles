@@ -2,6 +2,8 @@
   dots,
   ...
 }: {
+    dotfiles.self.forceEnable = true;
+
     imports = with dots.inputs; [
         impermanence.nixosModules.impermanence
     ];

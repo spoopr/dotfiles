@@ -2,7 +2,7 @@
   lib,
   ...
 }: {
-    dotfiles.meta.forceEnable = true;
+    dotfiles.self.forceEnable = true;
 
     nix = {
         settings = {

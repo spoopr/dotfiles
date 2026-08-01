@@ -1,6 +1,8 @@
 {
   ...
 }: {
+    dotfiles.self.forceEnable = true;
+
     boot = {
         initrd.kernelModules = [
             "lz4"
