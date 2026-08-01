@@ -61,9 +61,7 @@ in {
             options = import
                 ./meta/options.nix
                 {
-                    inherit
-                        current-flake-args
-                        pathToLabel;
+                    inherit current-flake-args;
                 };
         }
     );

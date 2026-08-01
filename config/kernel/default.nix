@@ -1,6 +1,8 @@
 {
   ...
 }: {
+    dotfiles.self.forceEnable = true;
+
     security = {
         protectKernelImage = true;
         lockKernelModules = true;

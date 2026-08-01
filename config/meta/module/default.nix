@@ -53,48 +53,94 @@ in {
         components
         {
             enable = lib.mkOption {
-                default = false;
-                type = lib.types.bool;
+                default = null;
+                type = lib.types.nullOr lib.types.bool;
+            };
+
+            self = {
+                forceEnable = lib.mkOption {
+                    default = null;
+                    type = lib.types.nullOr lib.types.bool;
+                };
             };
         };
 
-    config = let
-        guarantees = [
-            "dotfiles"
-        ];
-
-    in lib.mkMerge (
-        # always add particular attributes
-        (map
-            (key: if (builtins.hasAttr
-                key
+    config = lib.mkMerge [
+            # change `dotfiles.self` to `dotfiles.${path}.self`, and always add
+            # it
+            (if (lib.hasAttrByPath
+                [ "dotfiles" "self" ]
                 filled
             )
-                then filled
-                    |> builtins.getAttr key 
-                    |> lib.setAttrByPath [ key ]
+                then lib.setAttrByPath
+                    components
+                    { inherit (filled.dotfiles) self; }
                 else {}
             )
-            guarantees
-        ) ++ [ (lib.mkIf
-            (
-                cfg.enable
-                || (components
-                    |> config.dotfiles.meta.forceEnable.forComponents
-                    |> (result: if (result != null)
-                        then result
-                        else false
+
+            # also always add `dotfiles.meta`
+            (if (lib.hasAttrByPath
+                [ "dotfiles" "meta" ]
+                filled
+            )
+                then { dotfiles.meta = filled.dotfiles.meta; }
+                else {}
+            )
+
+
+            (lib.mkIf
+                (
+                    (
+                        !(isNull cfg.enable)
+                        && cfg.enable
+                    ) || (
+                        !(isNull cfg.self.forceEnable)
+                        && cfg.self.forceEnable
+                    )
+                )
+                # remove `dotfiles.self` and imports
+                (filled
+                    |> (x: lib.mergeAttrs
+                        x
+                        (if (lib.hasAttrByPath
+                            [ "dotfiles" "self" ]
+                            filled
+                        )
+                            then {
+                                dotfiles = lib.removeAttrs
+                                    filled.dotfiles
+                                    [ "self" ];
+                            }
+                            else {}
+                        )
+                    )
+                    |> (x: lib.removeAttrs
+                        x
+                        [ "imports" ]
                     )
                 )
             )
-            (removeAttrs
-                filled
-                (guarantees ++ [
-                    # since this is being pulled earlier
-                    "imports"
-                ])
-            )
-        )]
-    );
+
+            {
+                warnings = lib.flatten [
+                    (lib.optional
+                        (
+                            !(isNull cfg.enable)
+                            && !(isNull cfg.self.forceEnable)
+                            &&  (cfg.enable != cfg.self.forceEnable)
+                        )
+                        (
+                            "The bottledcapped module "
+                            + (builtins.concatStringsSep
+                                "."
+                                components
+                            )
+                            + " has conflicting enable and forceEnable "
+                            + "definitions"
+                        )
+                    )
+                ];
+            }
+    ];
 
 }
