@@ -1,7 +1,11 @@
 {
-  colors,
+  dots,
   ...
-}: {
+}: let
+    inherit (dots.args) colors;
+in {
+    dotfiles.args.colors.enable = true;
+
     services.displayManager.ly = {
         enable = true;
         settings = {

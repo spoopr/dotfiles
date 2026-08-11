@@ -1,8 +1,10 @@
 {
   pkgs,
-  colors,
+  dots,
   ...
 }: let
+    inherit (dots.args) colors;
+
     configuration = builtins.toFile "wroop" (
         ''
             [colors]
@@ -28,7 +30,6 @@
             bright7=${colors.white.hexNoHash}
         '' + (builtins.readFile ./foot.ini)
     );
-
 
 in {
 

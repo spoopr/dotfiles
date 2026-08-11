@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  secrets,
+  dots,
   ...
 }: let
     mkService = name: { config, auth }: {
@@ -20,13 +20,15 @@
         };
     };
 
+    inherit (dots.args) secrets;
+
 in {
     boot.kernelModules = [ "tun" ];
 
     systemd.services = builtins.mapAttrs mkService {
         "openvpn-awa" = {
             config = secrets.vpn.openvpn."awa.tcp.ovpn";
-            auth = secrets.vpn.openvpn.spoopr; 
+            auth = secrets.vpn.openvpn.spoopr;
         };
     };
 }

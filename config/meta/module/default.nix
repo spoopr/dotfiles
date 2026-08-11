@@ -10,6 +10,8 @@ in
 # consumer scope
 {
     config,
+    pkgs, # `pkgs`` won't be provided for some reason unless it's requested
+        #specifically here
     ...
 } @ args: let
     cfg = lib.getAttrFromPath
@@ -135,8 +137,8 @@ in {
                                 "."
                                 components
                             )
-                            + " has conflicting enable and forceEnable "
-                            + "definitions"
+                            + " has conflicting 'enable' and "
+                            + "'self.forceEnable' definitions"
                         )
                     )
                 ];

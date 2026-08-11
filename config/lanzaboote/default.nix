@@ -3,11 +3,11 @@
   lib,
   config,
   options,
-  inputs,
   dots,
   ...
 }: let
     inherit (dots.args) secrets;
+    inherit (dots) inputs;
 
     # preevaluate lanzaboote so we can pull boot.loader.external.installHook
     # this is very possibly the worst way to do it

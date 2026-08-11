@@ -1,8 +1,10 @@
 {
   pkgs,
-  secrets,
+  dots,
   ...
-}: {
+}: let
+    inherit (dots.args) secrets;
+in {
     boot.kernelModules = [
         "wireguard" 
         "xt_addrtype"

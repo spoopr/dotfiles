@@ -1,9 +1,9 @@
 {
   pkgs,
-  inputs,
+  dots,
   ...
 }: let
-    inherit (inputs) self;
+    inherit (dots.inputs) self;
 in {
     # automatic generation removing stuff
     # basically, remove up all generations before the previous commit,

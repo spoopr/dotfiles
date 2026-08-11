@@ -1,7 +1,9 @@
 {
-  secrets,
-  ...
-}: {
+    dots,
+    ...
+}: let
+    inherit (dots.args) secrets;
+in {
     users ={
         users = {
             root = {
