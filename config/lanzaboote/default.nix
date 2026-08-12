@@ -5,69 +5,77 @@
   options,
   dots,
   ...
-}: let
+} @ moduleArgs: let
     inherit (dots.args) secrets;
     inherit (dots) inputs;
 
-    # preevaluate lanzaboote so we can pull boot.loader.external.installHook
-    # this is very possibly the worst way to do it
-    evalaboote = lib.evalModules {
-        modules = [
+    lzbtHook = ( # preevaulate lanzaboote separately so i can pull `installHook`
+            # i kinda hate the module system sometimes
             inputs.lanzaboote.nixosModules.lanzaboote
-            {
-                options = {
-                    inherit (options) services systemd assertions environment;
-                    boot = { inherit (options.boot) bootspec loader kernelPackages; };
-                };
+                |> builtins.functionArgs
+                |> builtins.attrNames
+                |> (x: lib.getAttrs
+                    x
+                    moduleArgs
+                )
+                |> inputs.lanzaboote.nixosModules.lanzaboote
+                |> (x: lib.evalModules {
+                    modules = [
+                        {
+                            options = {
+                                inherit (options)
+                                    assertions
+                                    environment
+                                    services
+                                    systemd;
 
-                config = {
-                    _module.args.pkgs.stdenv.hostPlatform.system = config._module.args.pkgs.stdenv.hostPlatform.system;
-                    boot = {
-                        inherit (config.boot) kernelPackages;
+                                boot = {
+                                    inherit (options.boot)
+                                        bootspec
+                                        loader
+                                        kernelPackages;
+                                };
+                            };
 
-                        lanzaboote = builtins.removeAttrs
-                            config.boot.lanzaboote
-                            [ "package" "installCommand" ];
+                            config = {
+                                _module.args.pkgs.stdenv.hostPlatform.system = config._module.args.pkgs.stdenv.hostPlatform.system;
+
+                                boot = {
+                                    inherit (config.boot) kernelPackages;
+
+                                    lanzaboote = builtins.removeAttrs
+                                        config.boot.lanzaboote
+                                        [ "package" "installCommand" ];
+                                };
+                            };
+                        }
+                        x
+                    ];
+
+                    specialArgs = {
+                        inherit pkgs;
                     };
-                };
-            }
-        ];
-
-        specialArgs = {
-        inherit pkgs;
-        };
-    };
-
+                })
+                |> (x: x.config.boot.loader.external.installHook)
+        );
 in {
     dotfiles.args.secrets.enable = true;
 
-
-    imports = with dots.inputs; [
+    imports = with inputs; [
         lanzaboote.nixosModules.lanzaboote
     ];
 
-    # sbctl is used for the initial setup of secureboot
-    environment.systemPackages = with pkgs; [
-        sbctl
-    ];
-
     boot = {
-    
-        loader = {
-            external = {
-                enable = true;
-                installHook = lib.mkForce
-                    (pkgs.concatScript "overlaidInstallHook" [
-                        secrets.boot.secretsHook
-                        evalaboote.config.boot.loader.external.installHook
-                    ]);
-            };
-        };
-
         lanzaboote = {
             enable = true;
+
             publicKeyFile = secrets.boot.publicKeyFile;
             privateKeyFile = secrets.boot.privateKeyFile;
         };
+
+        # wrap lanzaboote's install hook and force its use
+        loader.external.installHook = lib.mkForce
+            (secrets.boot.wrapLzbtHook lzbtHook);
+
     };
 }
