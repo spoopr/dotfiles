@@ -3,8 +3,8 @@
   lib,
   ...
 }: let 
-    config = pkgs.neovimUtils.makeNeovimConfig {
-	customRC = [
+    config = {
+	luaRcContent = [
 	    ./luaConfig/vim.lua
 	    ./luaConfig/lsp.lua
 	    ./luaConfig/cmp.lua
@@ -15,7 +15,7 @@
         ./luaConfig/gitsigns.lua
         ./luaConfig/bullets.lua
 	]
-	    |> builtins.map (file: ":luafile ${file}")
+	    |> builtins.map (file: builtins.readFile file)
 	    |> lib.strings.concatStringsSep "\n";
 
         plugins = with pkgs.vimPlugins; [
@@ -47,7 +47,9 @@ in {
 
             # copy / paste
             wl-clipboard
-        ] ++ [
+        ] ++
+        config.plugins
+        ++ [
             (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped config)
         ];
 
