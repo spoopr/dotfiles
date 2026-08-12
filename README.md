@@ -1,53 +1,44 @@
 > :3
 
-My personal NixOS configuration, designed however I was feeling on whatever day
-it was written. Good luck.
-
-
 
 ## Structure
 In terms of the overall structure, I would describe my organization as
 "bottom-up." What that means is if a particular app or feature requires some
-other configuration, systemwide or not, it is installed within that same
-subfolder. Even if the configuration already exists somewhere else, the
+other configuration, systemwide or not, it is installed or requiredwithin that
+same subfolder. Even if the configuration already exists somewhere else, the
 redundancy is acceptable, encouraged even.
 
 Additionally, every individual unit of configuration is placed in its own
-subfolder with a `default.nix` file. 
+subfolder with a `default.nix` file.
 
-In practice, most of the time all this means is that imports are in the form:
-```
-./something
-```
-Rather than:
-```
-./something.nix
-```
-But I do this for an organization, and to be frank, visual consistency.
 
-------------
+### Files
 
-### `config`
-This is where all not-absolutely essential configuration is imported.
-Typically, these are higher level apps.
+#### `config`
+This contains all the non-host-specific configuration. With a chain of
+workarounds and module manipulation, I've set it up such that each `default.nix`
+file is automatically assigned to a set of options under the top level option
+`dotfiles`, based on the file path of said `default.nix`. For lack of a better
+term, I've referred to this as "bottlecapping".
 
-### `docs`
-A collection of personal notes in `.md` format. I keep these to remember the
-different commands I don't use often.
+For example, `config/git/default.nix` is assigned to `dotfiles.git`. By default
+all bottlecapped modules are disabled, but a module can forcibly enable itself.
+Additional options exist within the bottlecap system, which I might get around
+to documenting sometime.
 
-### `hosts`
+#### `tools`
+A collection of files related to this configuration, but not directly used in
+building it. Among others things, I keep notes in `tools/md`, for important
+commands I don't use often.
+
+#### `hosts`
 Each subfolder contains configuration specific to a particular machine, the
 name of which is the subfolder name.
 
-### `system`
-All of the mostly to absolutely essential configuration, like configuring boot,
-user, and security settings.
 
-
-
-## System structure
+### Operating system
 This is what I imagine would be the largest hurdle for anyone trying to adopt
-this configuration. 
+this configuration.
 
 First of all, my configuration uses `impermanence`. While this isn't too
 restrictive in itself, it does require some consideration when installing
@@ -124,7 +115,12 @@ let me know.
       [RFC 7488](https://datatracker.ietf.org/doc/html/rfc7488)
 - [ ] Implement an official ProtonVPN app
 	- To allow for much easier / automatic rotation of VPN host servers
+	- Another option is to create a script that can fetch VPN configuations
+    automatically; that'd essentially perform the same function more simply.
 - [X] Whonix machine id
+- [ ] Backup `secrets` flake input
+    - Currently, it's just a repository that only exists on `awa`, so obviously
+    I'm boned if I lose it.
 
 
 <br />
