@@ -5,7 +5,8 @@
 }: let
     inherit (inputs)
         import-tree
-        nixpkgs;
+        nixpkgs
+        secrets;
     inherit (nixpkgs) lib;
 in {
     imports = (import-tree
@@ -31,6 +32,11 @@ in {
                             };
                         }
 
+                        # ideally this would be within `config/`, but it needs
+                        # to reference `hostName`, which would cause infinite
+                        # recursion in there
+                        secrets.nixosModules.${hostName}
+                        
                         self.nixosModules.dotfiles
                     ];
                 };
