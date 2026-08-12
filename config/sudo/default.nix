@@ -1,6 +1,8 @@
 {
   ...
 }: {
+    dotfiles.self.forceEnable = true;
+
     security.sudo = {
         execWheelOnly = true;
         extraConfig = ''
