@@ -59,7 +59,13 @@
                 |> (x: x.config.boot.loader.external.installHook)
         );
 in {
-    dotfiles.args.secrets.enable = true;
+    dotfiles = {
+        # arguably, force enabling this bottlecap isn't necessary, but there
+        # isn't any alternative solution implemented currently.
+        self.forceEnable = true;
+
+        args.secrets.enable = true;
+    };
 
     imports = with inputs; [
         lanzaboote.nixosModules.lanzaboote

@@ -1,6 +1,12 @@
 {
   ...
 }: {
+    dotfiles = {
+        self.forceEnable = true;
+
+        ssh.enable = true;
+    };
+
     programs.git = {
         enable = true;
         config = {

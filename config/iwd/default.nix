@@ -1,6 +1,11 @@
 {
   ...
 }: {
+    dotfiles = {
+        dhcpcd.enable = true;
+        network.enable = true;
+    };
+
     networking.wireless.iwd = {
         enable = true;
         settings = {

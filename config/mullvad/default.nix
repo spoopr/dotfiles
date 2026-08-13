@@ -22,6 +22,9 @@
     });
 
 in {
+    dotfiles = {
+        niri.enable = true;
+    };
 
     environment.systemPackages = [
         wrappervad-browser
