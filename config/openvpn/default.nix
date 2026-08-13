@@ -23,6 +23,8 @@
     inherit (dots.args) secrets;
 
 in {
+    dotfiles.args.secrets.enable = true;
+
     boot.kernelModules = [ "tun" ];
 
     systemd.services = builtins.mapAttrs mkService {

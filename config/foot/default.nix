@@ -32,6 +32,15 @@
     );
 
 in {
+    dotfiles = {
+        args.colors.enable = true;
+
+        # nix infinite recurshits itself if you have cyclical enable options 
+        # like this.
+        #
+        # probably my fault though.
+        # niri.enable = true;
+    };
 
     environment.systemPackages = [
         (pkgs.symlinkJoin {

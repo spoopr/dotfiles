@@ -14,6 +14,13 @@
         passthru = pkgs.niri.passthru;
     };
 in {
+    dotfiles = {
+        foot.enable = true;
+        swaylock.enable = true;
+        brightnessctl.enable = true;
+        zsh.enable = true;
+    };
+
     environment.systemPackages = [
         niriWrapped
         pkgs.xwayland-satellite

@@ -1,6 +1,8 @@
 {
   ...
 }: {
+    dotfiles.self.forceEnable = true;
+
     networking = {
         enableIPv6 = false;
 
