@@ -1,7 +1,7 @@
 > :3
 
 
-## Structure
+## File organization
 In terms of the overall structure, I would describe my organization as
 "bottom-up." What that means is if a particular app or feature requires some
 other configuration, systemwide or not, it is installed or requiredwithin that
@@ -11,10 +11,7 @@ redundancy is acceptable, encouraged even.
 Additionally, every individual unit of configuration is placed in its own
 subfolder with a `default.nix` file.
 
-
-### Files
-
-#### `config`
+### `config`
 This contains all the non-host-specific configuration. With a chain of
 workarounds and module manipulation, I've set it up such that each `default.nix`
 file is automatically assigned to a set of options under the top level option
@@ -26,27 +23,28 @@ all bottlecapped modules are disabled, but a module can forcibly enable itself.
 Additional options exist within the bottlecap system, which I might get around
 to documenting sometime.
 
-#### `tools`
+### `tools`
 A collection of files related to this configuration, but not directly used in
 building it. Among others things, I keep notes in `tools/md`, for important
 commands I don't use often.
 
-#### `hosts`
+### `hosts`
 Each subfolder contains configuration specific to a particular machine, the
 name of which is the subfolder name.
 
 
-### Operating system
-This is what I imagine would be the largest hurdle for anyone trying to adopt
-this configuration.
+## Configuration assumptions
+### `impermanence`
+First of all, my configuration uses
+[`impermanence`](https://github.com/nix-community/impermanence). While this
+isn't too restrictive in itself, it does require some consideration when
+installing certain programs. Additionally, since `/` is not persistent, the
+disk partition that I assume normally would be bound to it is bound to `/nix`
+instead.
 
-First of all, my configuration uses `impermanence`. While this isn't too
-restrictive in itself, it does require some consideration when installing
-certain programs. Additionally, since `/` is not persistent, the disk partition
-that I assume normally would be bound to it is bound to `/nix` instead.
-
+### Secrets management
 Second, this configuration uses a custom
-[`agenix`](https://github.com/ryantm/agenix) based secrets flake. The secrets
+[`agenix`](https://github.com/ryantm/agenix)-based secrets flake. The secrets
 themselves are split by host, and the secrets flake assumes that any given host
 has a TPM to encrypt and decrypt secrets against. While I do plan to publish a
 template of said flake in the future, I have higher priorities until then.
@@ -56,16 +54,23 @@ template of said flake in the future, I have higher priorities until then.
 > decrypts all host secrets to plaintext in `/run/agenix` at runtime, albeit
 > access restricted, all host secrets are stored plaintext in ram. Thus, this
 > configuration is probably particularly sensitive to ram exploits, like DMA
-> attacks.  
+> attacks.
 
+### Secureboot
 Third, and really the least important, this configuration assumes that your
-system is secureboot compatible and that secureboot is enabled. This stretches
-a little beyond scope of NixOS dotfiles, but the disk partitions for any given
-machine are assumed to be LUKS encrypted, which I've bound to be unlocked
-automatically on boot by the TMP. The TMP itself checks the contents of the
-boot partition and whether secureboot completed successfully before releasing
-the LUKS partition key.
+system is secureboot compatible and that secureboot is enabled.
 
+This assumption is less of a hard requirement, and more of just a convention;
+Nixos-secureboot integration is provided via
+[`lanzaboote`](https://github.com/nix-community/lanzaboote), which requires
+some intentional setup with be compatible with the aforementioned secrets
+flake. It really wouldn't take that long to pull out `lanzaboote`, I just
+haven't had a reason to yet.
+
+As a side effect, due to the effects of secureboot on the TPM, any host that
+has had its secrets configured with secureboot enabled must keep secureboot
+enabled in order for secrets decryption via TPM to work, and vice versa for
+hosts with secureboot disabled.
 
 
 ## Machines
@@ -121,6 +126,10 @@ let me know.
 - [ ] Backup `secrets` flake input
     - Currently, it's just a repository that only exists on `awa`, so obviously
     I'm boned if I lose it.
+- [ ] Pass PKI secrets to `lanzaboote`'s `fwupd-efi` service
+    - The secrets flake currently only works by wrapping
+    [`lanzaboote`'s `installHook`](https://github.com/nix-community/lanzaboote/blob/4a773989235545c56f408d168cb63bc41d468832/nix/modules/lanzaboote.nix#L47),
+    so it doesn't really work with [`lanzaboote`'s `fwupd-efi` configuration](https://github.com/nix-community/lanzaboote/blob/4a773989235545c56f408d168cb63bc41d468832/nix/modules/lanzaboote.nix#L632).
 
 
 <br />
