@@ -4,22 +4,15 @@
 }: let
     inherit (dots.args) secrets;
 in {
-    dotfiles.args.secrets.enable = true;
+    dotfiles = {
+        self.forceEnable = true;
 
-    users ={
-        users = {
-            root = {
-                hashedPasswordFile = secrets.passwords.root;
-            };
+        args.secrets.enable = true;
+    };
 
-            spoopr = {
-                isNormalUser = true;
-                extraGroups = [
-                    "wheel"
-                    "networkmanager"
-                ];
-                hashedPasswordFile = secrets.passwords.spoopr;
-            };
+    users = {
+        users.root = {
+            hashedPasswordFile = secrets.passwords.root;
         };
 
         # probably a good thing to do with this impermanence setup
