@@ -20,7 +20,7 @@ in {
     dotfiles = {
         # hardware / usage
         luks.enable = true;
-        users.enable = true;
+        users.spoopr.enable = true;
 
         # utilities
         iwd.enable = true;
