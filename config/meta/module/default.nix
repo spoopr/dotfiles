@@ -139,27 +139,39 @@ in {
             {
                 assertions = [
                     {
-                        assertation = builtins.elem
+                        assertion = !(builtins.elem
                             "enable"
-                            components;
-                        message = "The module path for the bottlecap at ${path}"
-                            + " contains the component 'enable', which"
+                            components
+                        );
+                        message = "The module path for the bottlecap at '"
+                            + (builtins.concatStringsSep
+                                "/"
+                                components
+                            ) + "' contains the component 'enable', which"
                             + " interferes with bottlecap option defaults.";
                     }
                     {
-                        assertation = builtins.elem
-                            "options"
-                            components;
-                        message = "The module path for the bottlecap at ${path}"
-                            + " contains the component 'options', which"
-                            + " interferes with bottlecap option defaults.";
-                    }
-                    {
-                        assertation = builtins.elem
+                        assertion = !(builtins.elem
                             "self"
-                            components;
-                        message = "The module path for the bottlecap at ${path}"
-                            + " contains the component 'self', which"
+                            components
+                        );
+                        message = "The module path for the bottlecap at '"
+                            + (builtins.concatStringsSep
+                                "/"
+                                components
+                            ) + "' contains the component 'self', which"
+                            + " interferes with bottlecap option defaults.";
+                    }
+                    {
+                        assertion = !(builtins.elem
+                            "options"
+                            components
+                        );
+                        message = "The module path for the bottlecap at '"
+                            + (builtins.concatStringsSep
+                                "/"
+                                components
+                            ) + "' contains the component 'options', which"
                             + " interferes with bottlecap option defaults.";
                     }
                 ];
