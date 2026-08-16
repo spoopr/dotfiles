@@ -65,6 +65,14 @@ in {
                     type = lib.types.nullOr lib.types.bool;
                 };
             };
+
+            # raise `dotfiles.self.options` to `dotfiles.${path}.options`
+            options = if (lib.hasAttrByPath
+                [ "dotfiles" "self" "options" ]
+                filled
+            )
+                then filled.dotfiles.self.options
+                else {};
         };
 
     config = lib.mkMerge [
@@ -76,7 +84,12 @@ in {
             )
                 then lib.setAttrByPath
                     components
-                    { inherit (filled.dotfiles) self; }
+                    {
+                        # remove `self.options`, as thats promoted elsewhere.
+                        self = removeAttrs
+                            filled.dotfiles.self
+                            [ "options" ];
+                    }
                 else {}
             )
 
@@ -100,7 +113,7 @@ in {
                         && cfg.self.forceEnable
                     )
                 )
-                # remove `dotfiles.self` and imports
+                # remove `dotfiles.self` and imports and options
                 (filled
                     |> (x: lib.mergeAttrs
                         x
