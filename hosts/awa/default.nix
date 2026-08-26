@@ -40,6 +40,7 @@ in {
         mullvad.enable = true;
         pass.enable = true;
         tor.enable = true;
+        onlyoffice.enable = true;
     };
 }
 
