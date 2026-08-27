@@ -41,6 +41,7 @@ in {
         pass.enable = true;
         tor.enable = true;
         onlyoffice.enable = true;
+        wireshark.enable = true;
     };
 }
 
