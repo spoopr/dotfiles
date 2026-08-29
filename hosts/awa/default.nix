@@ -38,6 +38,7 @@ in {
         ly.enable = true;
         niri.enable = true;
         mullvad.enable = true;
+        firefox.enable = true;
         pass.enable = true;
         tor.enable = true;
         onlyoffice.enable = true;
