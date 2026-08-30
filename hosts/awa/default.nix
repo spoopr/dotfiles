@@ -23,7 +23,11 @@ in {
         users.spoopr.enable = true;
 
         # utilities
-        iwd.enable = true;
+        network = {
+            wireless.enable = true;
+            networks.university.enable = true;
+        };
+
         openvpn.enable = true;
         wireguard.enable =true;
 
