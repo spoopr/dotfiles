@@ -505,8 +505,8 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1786640732,
-        "narHash": "sha256-gjGPMBOxAIZB/rawtJe0l84R+02fOBOmGS3ciLjtF0s=",
+        "lastModified": 1787933848,
+        "narHash": "sha256-M0V37J2W3kuikgWW3Gb+9QVQjnecP1F8QCrJ0c7NAjs=",
         "path": "/nix/persist/repos/secrets",
         "type": "path"
       },
