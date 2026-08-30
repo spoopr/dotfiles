@@ -10,7 +10,7 @@ in {
         isNormalUser = true;
         extraGroups = [
             "wheel"
-                "networkmanager"
+            "netdev"
         ];
         hashedPasswordFile = secrets.passwords.spoopr;
     };
