@@ -3,6 +3,11 @@
 }: {
     dotfiles.self.forceEnable = true;
 
+    boot.kernelModules = [
+        "ccm"
+        "cmac"
+    ];
+
     networking = {
         # protonvpns mostly only support ipv4 for now
         enableIPv6 = false;
