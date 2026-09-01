@@ -20,7 +20,6 @@ in {
             '';
             university_wired = ''
                 network={
-                    ssid="${secrets.networks.university.ssid}"
                     key_mgmt=IEEE8021X
                     eap=PEAP
                     identity="${secrets.networks.university.identity}"
