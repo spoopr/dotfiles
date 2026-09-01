@@ -85,5 +85,7 @@ in {
                 }
              ];
         };
+
+        wait-online.ignoredInterfaces = [ "wg0" ];
     };
 }
