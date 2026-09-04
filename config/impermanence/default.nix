@@ -1,8 +1,26 @@
 {
   dots,
+  lib,
+  cfg,
+  options,
   ...
 }: {
-    dotfiles.self.forceEnable = true;
+    dotfiles.self = {
+        options.paths = lib.mkOption {
+            # it would be better to pull impermanence's option type, but its
+            # submodule so its messy to do so
+            type = with lib.types; {
+                inStore = false;
+                absolute = true;
+            }
+                |> pathWith
+                |> either attrs
+                |> listOf;
+            default = [];
+        };
+        
+        forceEnable = true;
+    };
 
     imports = with dots.inputs; [
         impermanence.nixosModules.impermanence
@@ -18,12 +36,12 @@
 
     environment = {
         persistence."/nix/persist" = {
-            directories = [
+            directories = cfg.options.paths
+                ++ [
                 "/etc/nixos"
-                    "/srv"
-                    "/var/lib/nixos"
-                    "/var/lib/systemd"
-                    "/var/log"
+                "/var/lib/nixos"
+                "/var/lib/systemd"
+                "/var/log"
             ];
         };
 
