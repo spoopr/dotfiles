@@ -16,6 +16,8 @@
         flake-parts.url = "github:hercules-ci/flake-parts";
 
         nixvirt.url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
+
+        wrappers.url = "github:lassulus/wrappers";
     };
 
     outputs = {
