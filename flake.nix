@@ -18,6 +18,8 @@
         nixvirt.url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
 
         wrappers.url = "github:lassulus/wrappers";
+
+        disko.url = "github:nix-community/disko";
     };
 
     outputs = {
