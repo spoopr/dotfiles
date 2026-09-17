@@ -15,7 +15,7 @@ in {
                 directory = "/srv/proton-pass-cli/";
                 user = "root";
                 group = "proton-pass";
-                mode = "660";
+                mode = "770";
             }
         ];
     };
