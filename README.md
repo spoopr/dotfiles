@@ -82,6 +82,9 @@ My daily use laptop, a pretty endgame spec AMD Framework 13.
 | :---------------: | :---------------------: | :-------: | :------: |
 | AMD Ryzen 7 7840U | Integrated Raydeon 700M | 32GB DDR5 | 1TB NVMe |
 
+### `ftz`
+Technically not a machine, but my custom install image to flash media with.
+
 
 <br />
 
