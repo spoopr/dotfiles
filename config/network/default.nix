@@ -16,6 +16,13 @@
             enable = true;
             allowPing = false;
             logReversePathDrops = true;
+            backend = "iptables";
+
+            extraCommands = ''
+                iptables -A OUTPUT -m limit  --limit 5/min -j LOG --log-level 4
+                iptables -A INPUT -m limit  --limit 5/min -j LOG --log-level 4
+                iptables -A FORWARD -m limit  --limit 5/min -j LOG --log-level 4
+            '';
         };
 
         # override conflicting defaults
@@ -29,7 +36,7 @@
 
         networks = {
             "10-disable-ipv6" = {
-                matchConfig.Kind = "!wireguard";
+                matchConfig.Name = "!wg* tun*";
                 
                 networkConfig = {
                     DHCP = "ipv4";

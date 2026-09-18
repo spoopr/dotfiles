@@ -35,33 +35,53 @@ in {
     networking.firewall = {
         allowedUDPPorts = [ 51820 ];
         checkReversePath = "loose";
+
+        # if its only outbound packets, i think getting the rejection
+        # response is fine
+        extraCommands = ''
+            iptables -A OUTPUT -o wg+ -d 10.0.0.0/8 -j ACCEPT
+            iptables -A OUTPUT -o tun+ -d 10.0.0.0/8 -j ACCEPT
+            iptables -A OUTPUT -d 10.0.0.0/8 -j REJECT
+        '';
     };
 
     systemd.network = {
-        networks."50-wg0" = {
-            matchConfig.Name = "wg0";
-            
-            address = [ "10.2.0.2/32" ];
+        networks= {
+            "50-wg0" = {
+                matchConfig.Name = "wg0";
+                
+                address = [ "10.2.0.2/32" ];
 
-            domains = [ "~." ];
-            dns = [ "10.2.0.1" ];
-            networkConfig.DNSDefaultRoute = true;
+                domains = [ "~." ];
+                dns = [ "10.2.0.1" ];
+                networkConfig.DNSDefaultRoute = true;
 
 
-            routingPolicyRules = [
-                {
-                    Family = "ipv4";
-                    InvertRule = true;
-                    FirewallMark = 51820;
-                    Table = 1000;
-                    Priority = 10;
-                }
-                {
-                    To = "185.159.156.37/32";
-                    Table = "main";
-                    Priority = 5;
-                }
-            ];
+                routingPolicyRules = [
+                    {
+                        Family = "ipv4";
+                        InvertRule = true;
+                        FirewallMark = 51820;
+                        Table = 1000;
+                        Priority = 50;
+                    }
+                    {
+                        To = "185.159.156.37/32";
+                        Table = "main";
+                        Priority = 20;
+                    }
+                    { # allow for internal networks to route normally
+                    # aka allow for stacking vpns
+                        To = "10.0.0.0/8";
+                        Table = "main";
+                        Priority = 10;
+                    }
+                    # then again block internal network ip ranges before it
+                    # leaks to external private networks
+                    #
+                    # see networking.firewall.extraCommands
+                ];
+            };
         };
 
         netdevs."50-wg0" = {
