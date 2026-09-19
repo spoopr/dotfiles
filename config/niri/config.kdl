@@ -110,6 +110,35 @@ hotkey-overlay {
     skip-at-startup
 }
 
+overview {
+    zoom 0.35
+}
+
+animations {
+    overview-open-close {
+        duration-ms 425
+        curve "ease-out-expo"
+    }
+
+    workspace-switch {
+        spring damping-ratio=1.2 stiffness=1400 epsilon=0.00001
+    }
+
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 100
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=1.2 stiffness=1200 epsilon=0.00001
+    }
+}
+
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
@@ -118,33 +147,6 @@ hotkey-overlay {
 prefer-no-csd
 
 screenshot-path null
-
-// Animation settings.
-// The wiki explains how to configure individual animations:
-// https://yalter.github.io/niri/Configuration:-Animations
-animations {
-    // Uncomment to turn off all animations.
-    // off
-
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
-}
-
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
-// https://yalter.github.io/niri/Configuration:-Window-Rules
-
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
-}
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
@@ -170,8 +172,8 @@ binds {
     // extra don't wanna do this by accident
     Mod+Shift+Ctrl+Escape { quit; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
     // fine adjustment
     Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+ -l 1.0"; }
     Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01-"; }
