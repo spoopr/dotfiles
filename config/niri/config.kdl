@@ -40,15 +40,7 @@ gestures {
 }
 
 // run `niri msg outputs` in a niri instance to find monitors
-output "eDP-1" {
-    mode "2880x1920@120.030"
-    // scale down to a logical 1260x840
-    scale 2.2857142 // (2 / 0.875)
-    transform "normal"
-    focus-at-startup
-
-    position x=0 y=0
-}
+spawn-at-startup "kanshi"
 
 layout {
     gaps 16
@@ -205,6 +197,11 @@ binds {
     Mod+Shift+J { move-window-down; }
     Mod+Shift+K { move-window-up; }
     Mod+Shift+L { move-column-right; }
+    
+    Mod+Ctrl+Shift+H { move-window-to-monitor-left; }
+    Mod+Ctrl+Shift+J { move-window-to-monitor-down; }
+    Mod+Ctrl+Shift+K { move-window-to-monitor-up; }
+    Mod+Ctrl+Shift+L { move-window-to-monitor-right; }
 
     Mod+Comma  { consume-or-expel-window-left; }
     Mod+Period { consume-or-expel-window-right; }
@@ -227,4 +224,11 @@ binds {
 
     Mod+Ctrl+W { move-workspace-down; }
     Mod+Ctrl+S { move-workspace-up; }
+
+    Mod+Ctrl+Shift+W { move-workspace-to-monitor-down; }
+    Mod+Ctrl+Shift+S { move-workspace-to-monitor-up; }
+    Mod+Ctrl+Shift+D { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Shift+A { move-workspace-to-monitor-right; }
+
+    Mod+Ctrl+Shift+Tab { focus-monitor-next; }
 }

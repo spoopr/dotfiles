@@ -19,6 +19,7 @@ in {
         swaylock.enable = true;
         brightnessctl.enable = true;
         zsh.enable = true;
+        kanshi.enable = true;
     };
 
     environment.systemPackages = [
