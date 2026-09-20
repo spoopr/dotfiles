@@ -1,0 +1,4 @@
+# `result` from nix builds are symlinks, so git treats them like files
+result
+# i'll add this just cause
+result/
