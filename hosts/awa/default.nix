@@ -1,5 +1,6 @@
 {
   # self,
+  lib,
   ...
 }: let
     #inherit (self.inputs) nixos-hardware;
@@ -24,8 +25,19 @@ in {
 
         # utilities
         network = {
-            wireless.enable = true;
-            networks.university.enable = true;
+            wpa_supplicant = {
+                options = {
+                    wireless = {
+                        enable = true;
+                        detectInterfaces = true;
+                    };
+
+                    wired = {
+                        enable = true;
+                        detectInterfaces = true;
+                    };
+                };
+            };
         };
 
         openvpn.enable = true;
