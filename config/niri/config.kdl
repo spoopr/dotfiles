@@ -234,3 +234,7 @@ binds {
 
     Mod+Alt+Tab { focus-monitor-next; }
 }
+
+switch-events {
+    lid-close { spawn "swaylock"; }
+}
