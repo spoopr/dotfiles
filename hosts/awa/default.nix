@@ -38,6 +38,8 @@ in {
                     };
                 };
             };
+
+            auth.university.enable = true;
         };
 
         openvpn.enable = true;

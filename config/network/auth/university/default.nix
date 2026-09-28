@@ -6,8 +6,8 @@
     inherit (dots.args) secrets;
 in {
     dotfiles = {
-        network.networks.options = {
-            university_wireless = ''
+        network.auth.options = {
+            wireless.university = ''
                 network={
                     ssid="${secrets.networks.university.ssid}"
                     key_mgmt=WPA-EAP
@@ -18,7 +18,7 @@ in {
                     disabled=1
                 }
             '';
-            university_wired = ''
+            wired.university = ''
                 network={
                     key_mgmt=IEEE8021X
                     eap=PEAP

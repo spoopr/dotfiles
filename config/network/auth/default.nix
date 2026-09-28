@@ -31,31 +31,62 @@
             ${pkgs.coreutils}/bin/chown root:wpa_supplicant /etc/wpa_supplicant/${name}.conf
         ''
     );
+
+    mkConfigs = suffix: attrs: attrs
+        |> lib.concatMapAttrs (name: value: {
+            "${name}-${suffix}" = builtins.toFile
+                "${name}-${suffix}"
+                value;
+        });
+
+    wiredConfig = cfg.options.wired
+        |> mkConfigs "wired";
+
+    wirelessConfig = cfg.options.wired
+        |> mkConfigs "wireless";
+
 in {
-    dotfiles.self = {
-        options = lib.mkOption {
-            default = {};
-            type = lib.types.attrsOf lib.types.str;
-            
-            description = ''
-                Define an additional network config file for wpa_supplicant.
-                Any paths in the file will have their contents read and
-                replaced at runtime, allowing for nix-style secrets to be used.
-            '';
+    dotfiles = {
+        self = {
+            options = let
+                configOption = lib.mkOption {
+                    default = {};
+                    type = lib.types.attrsOf lib.types.str;
+                    
+                    description = ''
+                        Define an additional network config file for wpa_supplicant.
+                        Any paths in the file will have their contents read and
+                        replaced at runtime, allowing for nix-style secrets to be used.
+                    '';
+                };
+            in {
+                wired = configOption;
+                wireless = configOption;
+            };
+
+            forceEnable = cfg.options.wired != {}
+                || cfg.options.wireless != {};
         };
 
-        forceEnable = cfg.options != {};
+        network.wpa_supplicant.options = let
+            mkWPAPaths = attrs: attrs
+                |> builtins.attrNames
+                |> map (x: "/etc/wpa_supplicant/${x}.conf");
+        in {
+            wired.configFiles = mkWPAPaths wiredConfig;
+            wireless.configFiles = mkWPAPaths wirelessConfig;
+        };
     };
 
-    networking.wireless.extraConfigFiles = cfg.options
-        |> builtins.attrNames
-        |> map (x: "/etc/wpa_supplicant/${x}.conf");
-
     systemd.services = lib.attrsets.concatMapAttrs
-        (name: value: let
-            config = builtins.toFile
-                "${name}.conf"
-                value;
+        (path: config: let
+            name = path
+                |> lib.split "\/"
+                |> (x: builtins.elemAt
+                    x
+                    (builtins.length x - 1)
+                )
+                |> lib.removeSuffix ".conf";
         in {
             "wpa_supplicant_install_${name}" = {
                     wantedBy = [
@@ -75,5 +106,5 @@ in {
                     };
             };
         })
-        cfg.options;
+        (wiredConfig // wirelessConfig);
 }
