@@ -21,6 +21,7 @@
             autoclose-nvim
             gitsigns-nvim
             fidget-nvim
+            virt-column-nvim
 
             # autocomplete
             nvim-cmp
