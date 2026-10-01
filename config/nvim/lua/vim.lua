@@ -8,16 +8,10 @@ vim.opt.shiftwidth = 4
 -- -- do convert tabs
 vim.opt.expandtab = true
 
--- mark all text beyond 80 characters wide
-vim.cmd "call matchadd('OverwideText', '\\%>80v', 100)"
-vim.api.nvim_set_hl(
-    0,
-    "OverwideText",
-    {
-        bg = "NONE",
-        fg = "NvimDarkGrey4"
-    }
-)
+-- setup ruler at 80 chars wide
+vim.opt.textwidth = 80
+vim.opt.colorcolumn = "81";
+
 
 -- keep diagnostics gutter open
 vim.opt.signcolumn = "yes"
@@ -38,3 +32,23 @@ vim.api.nvim_set_hl(
         underline = true
     }
 )
+-- show highlights only in normal mode
+vim.api.nvim_create_autocmd(
+    'InsertEnter',
+    {
+        callback = function()
+            vim.cmd.hi("clear ExtraWhitespace")
+        end,
+        pattern = '*'
+    }
+)
+vim.api.nvim_create_autocmd(
+    'InsertLeave',
+    {
+        callback = function()
+            vim.cmd.hi("ExtraWhitespace guifg=NvimLightRed gui=underline")
+        end,
+        pattern = '*'
+    }
+)
+
