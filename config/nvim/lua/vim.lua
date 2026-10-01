@@ -9,8 +9,11 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- setup ruler at 80 chars wide
-vim.opt.textwidth = 80
 vim.opt.colorcolumn = "81";
+
+-- control automatic wrapping
+vim.opt.textwidth = 80
+vim.opt.formatoptions = "jcrql"
 
 
 -- keep diagnostics gutter open
