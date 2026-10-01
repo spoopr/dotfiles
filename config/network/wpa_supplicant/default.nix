@@ -265,6 +265,11 @@
 
             # disable scanning
             bgscan=""
+            
+            # randomize mac address
+            mac_addr=1
+            preassoc_mac_addr=1
+            gas_rand_mac_addr=1
         '';
 
         systemPackages = with pkgs; [
