@@ -1,21 +1,16 @@
 {
   pkgs,
   lib,
+  dots,
   ...
 }: let 
+	inherit (dots.inputs) import-tree;
+
     config = {
-	luaRcContent = [
-	    ./luaConfig/vim.lua
-	    ./luaConfig/lsp.lua
-	    ./luaConfig/cmp.lua
-	    ./luaConfig/treesitter.lua
-	    ./luaConfig/leap.lua
-        ./luaConfig/indent-blankline.lua
-        ./luaConfig/autoclose.lua
-        ./luaConfig/gitsigns.lua
-        ./luaConfig/bullets.lua
-	]
-	    |> builtins.map (file: builtins.readFile file)
+	luaRcContent = import-tree
+		|> (x: x.initFilter (lib.hasSuffix ".lua"))
+		|> (x: x.leafs ./lua)
+	|> builtins.map (file: builtins.readFile file)
 	    |> lib.strings.concatStringsSep "\n";
 
         plugins = with pkgs.vimPlugins; [
