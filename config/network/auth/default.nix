@@ -42,7 +42,7 @@
     wiredConfig = cfg.options.wired
         |> mkConfigs "wired";
 
-    wirelessConfig = cfg.options.wired
+    wirelessConfig = cfg.options.wireless
         |> mkConfigs "wireless";
 
 in {
