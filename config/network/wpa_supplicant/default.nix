@@ -118,6 +118,10 @@
                 "/proc/sys/net"
                 "/dev/rfkill"
             ];
+            BindReadOnlyPaths = [
+                builtins.storeDir
+                "/etc/"
+            ];
 
             DeviceAllow = "/dev/rfkill rw";
             LockPersonality = true;
@@ -193,20 +197,23 @@
             done
 
             # for exclusion later
-            PRESET_WIRED=${cfg.options.wired.interfaces |> builtins.attrNames |> toArray}
-            PRESET_WIRELESS=${cfg.options.wireless.interfaces |> builtins.attrNames |> toArray}
+            PRESET_WIRED_INTERFACES=${cfg.options.wired.interfaces |> builtins.attrNames |> toArray}
+            PRESET_WIRELESS_INTERFACES=${cfg.options.wireless.interfaces |> builtins.attrNames |> toArray}
 
 
             # assemble  args
             ARGLINES=()
             
             if ${if cfg.options.wired.enable then "true" else "false"}; then
-                ARGLINES+=${assemblePresets cfg.options.wired}
+                PRESET_WIRED=${assemblePresets cfg.options.wired}
+		if [[ "$PRESET_WIRED" = *[![:space:]]* ]]; then
+			ARGLINES+="$PRESET_WIRED"
+		fi
 
                 if ${if cfg.options.wired.detectInterfaces then "true" else "false"}; then
                     for INTERFACE in "''${WIRED[@]}"; do
                         # don't make again if it was already a preset
-                        if [[ ! "''${PRESET_WIRED[@]}" =~ "  $INTERFACE " ]]; then
+                        if [[ ! "''${PRESET_WIRED_INTERFACES[@]}" =~ "  $INTERFACE " ]]; then
                             # always use `required.conf` and the global option files
                             ARGLINES+=( "-i $INTERFACE -D wired -c /etc/wpa_supplicant/required.conf ${toExtraConfigArgs cfg.options.configFiles} ${toExtraConfigArgs cfg.options.wired.configFiles}" )
                         fi
@@ -215,22 +222,24 @@
             fi
 
             if ${if cfg.options.wireless.enable then "true" else "false"}; then
-                ARGLINES+=${assemblePresets cfg.options.wireless}
+                PRESET_WIRELESS=${assemblePresets cfg.options.wireless}
+		if [[ "$PRESET_WIRELESS" = *[![:space:]]* ]]; then
+			ARGLINES+="$PRESET_WIRELESS"
+		fi
 
                 if ${if cfg.options.wireless.detectInterfaces then "true" else "false"}; then
                     for INTERFACE in "''${WIRELESS[@]}"; do
-                        if [[ ! "''${PRESET_WIRELESS[@]}" =~ " $INTERFACE " ]]; then
+                        if [[ ! "''${PRESET_WIRELESS_INTERFACES[@]}" =~ " $INTERFACE " ]]; then
                             ARGLINES+=( "-i $INTERFACE -D nl80211,wext -c /etc/wpa_supplicant/required.conf ${toExtraConfigArgs cfg.options.configFiles} ${toExtraConfigArgs cfg.options.wireless.configFiles}" )
                         fi
                     done
                 fi
             fi
 
+	    ARGS=$(printf " -N %s" "''${ARGLINES[@]}")
+
             # log to syslog
-            ARGS="-s "
-
-            ARGS+=$(IFS=" -N " echo "''${ARGLINES[@]}")
-
+            ARGS="-s ''${ARGS:4}"
 
             # start daemon
             echo "$ARGS"
@@ -250,6 +259,10 @@
         # while this serves to place the `required.conf` file, it also pulls
         # double duty to create the `/etc/wpa_supplicant` directory
         etc."wpa_supplicant/required.conf".text = ''
+	ctrl_interface=/run/wpa_supplicant/control
+	ctrl_interface_group=wpa_supplicant
+	update_config=1
+
             # disable scanning
             bgscan=""
         '';
