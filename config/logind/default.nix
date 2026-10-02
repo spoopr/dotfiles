@@ -5,7 +5,7 @@
 
     services.logind.settings.Login = {
         HandleLidSwitch = "suspend";
-        HandleLidSwitchDocked = "suspend";
+        HandleLidSwitchDocked = "ignore";
         KillUserProcesses = true;
     };
 }
