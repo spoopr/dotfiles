@@ -146,7 +146,7 @@ animations {
 // After enabling or disabling this, you need to restart the apps for this to take effect.
 prefer-no-csd
 
-screenshot-path null
+screenshot-path "~/Downloads/niri_%Y-%m-%d:%H-%M-%S.png"
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
