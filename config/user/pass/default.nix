@@ -7,10 +7,12 @@
     inherit (dots.inputs) wrappers;
 in {
     dotfiles = {
-        niri.enable = true;
-        firefox.enable = true;
+        user = {
+            niri.enable = true;
+            firefox.enable = true;
+        };
 
-        impermanence.options.paths = [
+        core.impermanence.options.paths = [
             {
                 directory = "/srv/proton-pass-cli/";
                 user = "root";

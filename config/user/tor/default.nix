@@ -3,7 +3,7 @@
   ...
 }: {
     dotfiles = {
-        niri.enable = true;
+        user.niri.enable = true;
     };
 
     environment.systemPackages = with pkgs; [

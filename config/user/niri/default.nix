@@ -15,11 +15,19 @@
     };
 in {
     dotfiles = {
-        foot.enable = true;
-        swaylock.enable = true;
-        brightnessctl.enable = true;
-        zsh.enable = true;
-        kanshi.enable = true;
+        user = {
+            foot.enable = true;
+            swaylock.enable = true;
+        };
+
+        system = {
+            display = {
+                brightnessctl.enable = true;
+                kanshi.enable = true;
+            };
+
+            tools.zsh.enable = true;
+        };
     };
 
     environment.systemPackages = [

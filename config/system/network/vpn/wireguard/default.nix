@@ -8,7 +8,7 @@ in {
     dotfiles = {
         args.secrets.enable = true;
         
-        network.enable = true;
+        system.network.enable = true;
     };
 
     # see `man systemd.netdev`

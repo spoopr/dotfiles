@@ -4,7 +4,7 @@
     dotfiles = {
         self.forceEnable = true;
 
-        ssh.enable = true;
+        system.tools.ssh.enable = true;
     };
 
     programs.git = {
