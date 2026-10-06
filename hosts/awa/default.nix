@@ -51,7 +51,11 @@ in {
 
             audio.pipewire.enable = true;
 
-            hardware.usb.enable = true;
+            hardware = {
+                usb.enable = true;
+
+                keyd.options.capslockToCtrl = true;
+            };
 
             tools = {
                 zsh.enable = true;
