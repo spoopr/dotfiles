@@ -68,7 +68,7 @@ in {
                 || cfg.options.wireless != {};
         };
 
-        network.wpa_supplicant.options = let
+        system.network.wpa_supplicant.options = let
             mkWPAPaths = attrs: attrs
                 |> builtins.attrNames
                 |> map (x: "/etc/wpa_supplicant/${x}.conf");

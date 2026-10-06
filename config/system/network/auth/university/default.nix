@@ -6,7 +6,7 @@
     inherit (dots.args) secrets;
 in {
     dotfiles = {
-        network.auth.options = {
+        system.network.auth.options = {
             wireless.university = ''
                 network={
                     ssid="${secrets.networks.university.ssid}"

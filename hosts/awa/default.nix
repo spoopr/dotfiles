@@ -19,48 +19,57 @@ in {
 
 
     dotfiles = {
-        # hardware / usage
-        luks.enable = true;
-        users.spoopr.enable = true;
+        core = {
+            luks.enable = true;
+        };
 
-        # utilities
-        network = {
-            wpa_supplicant = {
-                options = {
-                    wireless = {
-                        enable = true;
-                        detectInterfaces = true;
-                    };
+        system = {
+            auth.users.spoopr.enable = true;
 
-                    wired = {
-                        enable = true;
-                        detectInterfaces = true;
+            network = {
+                wpa_supplicant = {
+                    options = {
+                        wireless = {
+                            enable = true;
+                            detectInterfaces = true;
+                        };
+
+                        wired = {
+                            enable = true;
+                            detectInterfaces = true;
+                        };
                     };
+                };
+
+                auth.university.enable = true;
+                
+                vpn = {
+                    openvpn.enable = true;
+                    wireguard.enable =true;
                 };
             };
 
-            auth.university.enable = true;
+            audio.pipewire.enable = true;
+
+            hardware.usb.enable = true;
+
+            tools = {
+                zsh.enable = true;
+                ssh.enable = true;
+            };
         };
-
-        openvpn.enable = true;
-        wireguard.enable =true;
-
-        pipewire.enable = true;
-        usb.enable = true;
-
-        zsh.enable = true;
-        ssh.enable = true;
-        nvim.enable = true;
-
-        # apps
-        ly.enable = true;
-        niri.enable = true;
-        mullvad.enable = true;
-        firefox.enable = true;
-        pass.enable = true;
-        tor.enable = true;
-        onlyoffice.enable = true;
-        wireshark.enable = true;
+    
+        user = {
+            ly.enable = true;
+            niri.enable = true;
+            mullvad.enable = true;
+            firefox.enable = true;
+            pass.enable = true;
+            tor.enable = true;
+            onlyoffice.enable = true;
+            wireshark.enable = true;
+            nvim.enable = true;
+        };
     };
 }
 
