@@ -4,6 +4,8 @@
     dotfiles.self.forceEnable = true;
 
     boot = {
+        kernel.sysctl."vm.swappiness" = 140;
+
         initrd.kernelModules = [
             "lz4"
         ];
