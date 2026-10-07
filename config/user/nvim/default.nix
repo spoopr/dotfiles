@@ -9,7 +9,7 @@
     config = {
 	luaRcContent = import-tree
 		|> (x: x.initFilter (lib.hasSuffix ".lua"))
-		|> (x: x.leafs ./lua)
+		|> (x: x.leaves ./lua)
 	|> builtins.map (file: builtins.readFile file)
 	    |> lib.strings.concatStringsSep "\n";
 
