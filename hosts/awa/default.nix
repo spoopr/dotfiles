@@ -54,7 +54,7 @@ in {
             hardware = {
                 usb.enable = true;
 
-                keyd.options.capslockToCtrl = true;
+                keyd.options.capslockToAlt = true;
             };
 
             tools = {

@@ -5,7 +5,7 @@
 }: {
     dotfiles.self = {
         options = {
-            capslockToCtrl = lib.mkOption {
+            capslockToAlt = lib.mkOption {
                 type = with lib.types; bool;
                 default = false;
             };
@@ -24,9 +24,9 @@
 
             settings.main = lib.mergeAttrsList [
                 (lib.optionalAttrs
-                    cfg.options.capslockToCtrl
+                    cfg.options.capslockToAlt
                     {
-                        capslock = "layer(control)";
+                        capslock = "layer(alt)";
                     }
                 )
             ];
