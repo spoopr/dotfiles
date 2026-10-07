@@ -55,6 +55,8 @@ in {
                 usb.enable = true;
 
                 keyd.options.capslockToAlt = true;
+
+                fprintd.enable = true;
             };
 
             tools = {
