@@ -229,8 +229,8 @@ binds {
 
     Mod+Alt+W { move-workspace-to-monitor-down; }
     Mod+Alt+S { move-workspace-to-monitor-up; }
-    Mod+Alt+D { move-workspace-to-monitor-left; }
-    Mod+Alt+A { move-workspace-to-monitor-right; }
+    Mod+Alt+A { move-workspace-to-monitor-left; }
+    Mod+Alt+D { move-workspace-to-monitor-right; }
 
     Mod+Alt+Tab { focus-monitor-next; }
 }
