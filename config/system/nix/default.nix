@@ -31,6 +31,23 @@
             max-jobs = 4;
             keep-going = true;
         };
+
+        channel.enable = false;
+
+        registry = [
+            {
+                from = {
+                    type = "indirect";
+                    id = "homebrew-templates";
+                };
+
+                to = {
+                    type = "github";
+                    owner = "spoopr";
+                    repo = "flake-templates";
+                };
+            }
+        ];
     };
 
     environment.defaultPackages = lib.mkForce [];
