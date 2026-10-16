@@ -428,11 +428,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1786384358,
-        "narHash": "sha256-RzPPiWeUtuvymnpuEWsdtzli5w4kjZs49FqEs3/1u+I=",
+        "lastModified": 1791179034,
+        "narHash": "sha256-Ni0LBydzaCi8oek12r4mVreuFHqYlM1eTD6SfiENKfw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2fcb964de67fcf60b43471c55d5d99e61a9ccb5a",
+        "rev": "494ce7fd23ff6a5dff39e1fb11e9b6f2ac74bf25",
         "type": "github"
       },
       "original": {
@@ -557,8 +557,8 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1787933848,
-        "narHash": "sha256-M0V37J2W3kuikgWW3Gb+9QVQjnecP1F8QCrJ0c7NAjs=",
+        "lastModified": 1790535647,
+        "narHash": "sha256-ZnY9n5YrXVx8yMRK+zCCVGKsqVxZ5Af8kmImyK95jL8=",
         "path": "/nix/persist/repos/secrets",
         "type": "path"
       },

@@ -10,7 +10,7 @@
     inherit (nixpkgs) lib;
 in {
     imports = (import-tree
-        |> (x: x.match ".+\/default\.nix")
+        |> (x: x.match "\/[^\/]+\/default\.nix")
         |> (x: x.addPath ./.)
         |> (x: x.withLib lib)
         |> (x: x.files)
@@ -35,7 +35,7 @@ in {
                         # ideally this would be within `config/`, but it needs
                         # to reference `hostName`, which would cause infinite
                         # recursion in there
-                        secrets.nixosModules.${hostName}
+                        # secrets.nixosModules.${hostName}
                         
                         self.nixosModules.dotfiles
                     ];

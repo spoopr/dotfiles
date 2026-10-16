@@ -12,12 +12,12 @@ in {
     };
 
     # see `man systemd.netdev`
-    age.secrets."wireguard" = {
+    /* age.secrets."wireguard" = {
         file = /nix/persist/repos/secrets/hosts/awa/vpn/wireguard/awa.age;
         mode = "0440";
         owner = "root";
         group = "systemd-network";
-    };
+    };*/
 
     boot.kernelModules = [
         "wireguard"

@@ -11,9 +11,14 @@ in {
     };
 
     users = {
-        users.root = {
-            hashedPasswordFile = secrets.passwords.root;
-        };
+        extraUsers = { 
+		root = {
+		    #hashedPasswordFile = secrets.passwords.root;
+		password  = "toor";
+
+		};
+	
+	};
 
         # probably a good thing to do with this impermanence setup
         mutableUsers = false;
