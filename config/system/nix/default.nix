@@ -10,6 +10,7 @@
                 "nix-command"
                 "flakes"
                 "pipe-operators"
+                "ca-derivations"
             ];
 
             allowed-users = [ "@wheel" ];
@@ -51,6 +52,10 @@
                 };
             };
         };
+    };
+
+    nixpkgs.config = {
+        contentAddressedByDefault = true;
     };
 
     environment.defaultPackages = lib.mkForce [];
