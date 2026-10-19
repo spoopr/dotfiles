@@ -34,11 +34,14 @@
 
         channel.enable = false;
 
-        registry = [
-            {
+        registry = {
+            "templates" = {
                 from = {
                     type = "indirect";
-                    id = "homebrew-templates";
+                    # `nix flake init` uses the default template
+                    # `templates#default`, so this reroutes to my own personal
+                    # template.
+                    id = "templates";
                 };
 
                 to = {
@@ -46,8 +49,8 @@
                     owner = "spoopr";
                     repo = "flake-templates";
                 };
-            }
-        ];
+            };
+        };
     };
 
     environment.defaultPackages = lib.mkForce [];
