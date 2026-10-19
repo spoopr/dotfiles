@@ -66,7 +66,7 @@ in {
                         Priority = 50;
                     }
                     {
-                        To = "185.159.156.37/32";
+                        To = "156.146.51.78/32";
                         Table = "main";
                         Priority = 20;
                     }
@@ -98,9 +98,9 @@ in {
 
              wireguardPeers = [
                 {
-                    PublicKey = "7FslkahrdLwGbv4QSX5Cft5CtQLmBUlpWC382SSF7Hw=";
+                    PublicKey = "mn8WlkJqY66j17ZbwN2DB0Nj74zG/DicuRQZtxtQsTM=";
                     AllowedIPs = [ "0.0.0.0/0" ];
-                    Endpoint = "185.159.156.37:51820";
+                    Endpoint = "156.146.51.78:51820";
                     RouteTable = 1000;
                 }
              ];
