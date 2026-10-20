@@ -54,10 +54,6 @@
         };
     };
 
-    nixpkgs.config = {
-        contentAddressedByDefault = true;
-    };
-
     environment.defaultPackages = lib.mkForce [];
 
     # add development man/info/other pages
