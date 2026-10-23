@@ -44,7 +44,7 @@ vim.lsp.enable('nixd')
 vim.lsp.config('ts_ls', {
     cmd = { 'typescript-language-server' },
 	capabilities = capabilities,
-    filetypes = { 'ts' },
+    filetypes = { 'typescript' },
     root_markers = { '.git' },
 })
 vim.lsp.enable('ts_ls')
@@ -52,7 +52,7 @@ vim.lsp.enable('ts_ls')
 vim.lsp.config('clangd', {
     cmd  = { 'clangd' },
     capabilities = capabilities,
-    filetypes = { 'c', 'cpp', 'h'},
+    filetypes = { 'c', 'cpp' },
     root_markers = { '.git' }
 })
 vim.lsp.enable('clangd')
