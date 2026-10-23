@@ -10,7 +10,7 @@
 	luaRcContent = import-tree
 		|> (x: x.initFilter (lib.hasSuffix ".lua"))
 		|> (x: x.leaves ./lua)
-	|> builtins.map (file: builtins.readFile file)
+	|> map (file: builtins.readFile file)
 	    |> lib.strings.concatStringsSep "\n";
 
         plugins = with pkgs.vimPlugins; [
