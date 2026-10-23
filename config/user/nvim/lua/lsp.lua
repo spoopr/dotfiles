@@ -56,3 +56,14 @@ vim.lsp.config('clangd', {
     root_markers = { '.git' }
 })
 vim.lsp.enable('clangd')
+
+vim.lsp.config(
+    'pyright',
+    {
+        cmd = { 'pyright-langserver', '--stdio' },
+        capabilities = capabilities,
+        filetypes = { 'python' },
+        root_markers = { '.git' }
+    }
+)
+vim.lsp.enable('pyright')

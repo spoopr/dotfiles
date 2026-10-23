@@ -40,6 +40,7 @@ in {
             nixd
             typescript-language-server
             clang-tools # clangd's in here
+            pyright
 
             # copy / paste
             wl-clipboard
