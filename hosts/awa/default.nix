@@ -16,6 +16,8 @@
         system = {
             auth.users.spoopr.enable = true;
 
+            nix.ld.enable = true;
+
             network = {
                 wpa_supplicant = {
                     options = {
