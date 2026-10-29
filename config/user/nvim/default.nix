@@ -10,7 +10,7 @@
 	luaRcContent = import-tree
 		|> (x: x.initFilter (lib.hasSuffix ".lua"))
 		|> (x: x.leaves ./lua)
-	|> map (file: builtins.readFile file)
+        |> map (file: builtins.readFile file)
 	    |> lib.strings.concatStringsSep "\n";
 
         plugins = with pkgs.vimPlugins; [
@@ -44,9 +44,7 @@ in {
 
             # copy / paste
             wl-clipboard
-        ] ++
-        config.plugins
-        ++ [
+        ] ++ [
             (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped config)
         ];
 
