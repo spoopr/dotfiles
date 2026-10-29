@@ -22,6 +22,7 @@
             gitsigns-nvim
             fidget-nvim
             virt-column-nvim
+            guess-indent-nvim
 
             # autocomplete
             nvim-cmp
