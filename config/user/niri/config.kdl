@@ -227,10 +227,15 @@ binds {
     Mod+Ctrl+W { move-workspace-down; }
     Mod+Ctrl+S { move-workspace-up; }
 
-    Mod+Alt+W { move-workspace-to-monitor-down; }
-    Mod+Alt+S { move-workspace-to-monitor-up; }
-    Mod+Alt+A { move-workspace-to-monitor-left; }
-    Mod+Alt+D { move-workspace-to-monitor-right; }
+    Mod+Alt+W { focus-monitor-up; }
+    Mod+Alt+S { focus-monitor-down; }
+    Mod+Alt+A { focus-monitor-left; }
+    Mod+Alt+D { focus-monitor-right; }
+
+    Mod+Alt+Ctrl+W { move-workspace-to-monitor-up; }
+    Mod+Alt+Ctrl+S { move-workspace-to-monitor-down; }
+    Mod+Alt+Ctrl+A { move-workspace-to-monitor-left; }
+    Mod+Alt+Ctrl+D { move-workspace-to-monitor-right; }
 
     Mod+Alt+Tab { focus-monitor-next; }
 }
