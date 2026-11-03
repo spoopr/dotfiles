@@ -4,8 +4,6 @@
 
         nix-index-database.url = "github:nix-community/nix-index-database";
 
-        nixos-hardware.url = "github:nixos/nixos-hardware";
-
         secrets.url = "/nix/persist/repos/secrets";
         colors.url = "github:spoopr/lavndr";
 

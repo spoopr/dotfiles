@@ -1,0 +1,244 @@
+// Find the full list of options on the wiki:
+// https://yalter.github.io/niri/Configuration:-Input
+input {
+    keyboard {
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+
+            layout "us"
+            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+
+            // If this section is empty, niri will fetch xkb settings
+            // from org.freedesktop.locale1. You can control these using
+            // localectl set-x11-keymap.
+        }
+        numlock
+    }
+
+    // see `libinput` for settings
+    // https://wiki.archlinux.org/title/Libinput
+    touchpad {
+        tap
+        dwt
+        natural-scroll
+        click-method "clickfinger"
+        scroll-method "two-finger"
+    }
+
+    disable-power-key-handling
+}
+
+cursor {
+    hide-after-inactive-ms 200
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+// run `niri msg outputs` in a niri instance to find monitors
+spawn-at-startup "kanshi"
+
+layout {
+    gaps 16
+    center-focused-column "never"
+
+    preset-window-heights { 
+        proportion 1.0;
+        proportion 0.5;
+    }
+    default-column-width { 
+        proportion 0.5; 
+    }
+
+    // By default focus ring and border are rendered as a solid background rectangle
+    // behind windows. That is, they will show up through semitransparent windows.
+    // This is because windows using client-side decorations can have an arbitrary shape.
+    //
+    // If you don't like that, you should uncomment `prefer-no-csd` below.
+    // Niri will draw focus ring and border *around* windows that agree to omit their
+    // client-side decorations.
+    //
+    // Alternatively, you can override it with a window rule called
+    // `draw-border-with-background`.
+
+    // You can change how the focus ring looks.
+    focus-ring {
+        off
+        width 4
+
+        // Colors can be set in a variety of ways:
+        // - CSS named colors: "red"
+        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
+        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
+
+        active-color "#7fc8ff"
+        inactive-color "#ffffff"
+
+        // You can also use gradients. They take precedence over solid colors.
+        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
+        // The angle is the same as in linear-gradient, and is optional,
+        // defaulting to 180 (top-to-bottom gradient).
+        // You can use any CSS linear-gradient tool on the web to set these up.
+        // Changing the color space is also supported, check the wiki for more info.
+        //
+        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+
+        // You can also color the gradient relative to the entire view
+        // of the workspace, rather than relative to just the window itself.
+        // To do that, set relative-to="workspace-view".
+        //
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    // You can also add a border. It's similar to the focus ring, but always visible.
+    border {
+
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+
+        urgent-color "#9b0000"
+    }
+}
+
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+overview {
+    zoom 0.35
+}
+
+animations {
+    overview-open-close {
+        duration-ms 425
+        curve "ease-out-expo"
+    }
+
+    workspace-switch {
+        spring damping-ratio=1.2 stiffness=1400 epsilon=0.00001
+    }
+
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 100
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=1.2 stiffness=1200 epsilon=0.00001
+    }
+}
+
+// Uncomment this line to ask the clients to omit their client-side decorations if possible.
+// If the client will specifically ask for CSD, the request will be honored.
+// Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
+// This option will also fix border/focus ring drawing behind some semitransparent windows.
+// After enabling or disabling this, you need to restart the apps for this to take effect.
+prefer-no-csd
+
+screenshot-path "~/Downloads/niri_%Y-%m-%d:%H-%M-%S.png"
+
+// Example: enable rounded corners for all windows.
+// (This example rule is commented out with a "/-" in front.)
+/-window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+recent-windows {
+    off
+}
+
+binds {
+    Mod+Q { spawn "foot"; }
+    // oh babey one liners
+    // there's some ambiguity with what shell type `spawn` runs under, so i'm
+    // locking it under zsh
+    Mod+Shift+Q { spawn "zsh" "-c" "foot -D $(CHILDREN=(${(f)\"$(pgrep -P $(niri msg --json focused-window | jq .pid))\"}); if [ ${#CHILDREN} -eq 1 ]; then echo $(pwdx $CHILDREN[1] | cut -d \" \" -f 2); else echo \"~\"; fi)";}
+    Mod+A repeat=false { close-window; }
+
+    Mod+Escape  { spawn "swaylock"; }
+    
+    // extra don't wanna do this by accident
+    Mod+Shift+Ctrl+Escape { quit; }
+
+
+    XF86AudioMute allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0%"; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
+    // fine adjustment
+    Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+ -l 1.0"; }
+    Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "zsh" "-c" "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01-"; }
+
+    XF86AudioPrev allow-when-locked=true { spawn "zsh" "-c" "playerctl previous"; }
+    XF86AudioPlay allow-when-locked=true { spawn "zsh" "-c" "playerctl play-pause"; }
+    XF86AudioNext allow-when-locked=true { spawn "zsh" "-c" "playerctl next"; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set +5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set 5%-"; }
+    // fine adjustment
+    Shift+XF86MonBrightnessUp allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set +1%"; }
+    Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "zsh" "-c" "brightnessctl --class=backlight set 1%-"; }
+
+
+    Mod+Tab { toggle-overview; }
+
+
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+L { move-column-right; }
+    
+    Mod+Alt+H { move-window-to-monitor-left; }
+    Mod+Alt+J { move-window-to-monitor-down; }
+    Mod+Alt+K { move-window-to-monitor-up; }
+    Mod+Alt+L { move-window-to-monitor-right; }
+
+    Mod+Comma  { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
+
+    Mod+C { maximize-window-to-edges; }
+    Mod+Ctrl+C { fullscreen-window; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Equal { set-column-width "50%"; }
+
+    Mod+BracketLeft { set-window-height "-10%"; }
+    Mod+BracketRight { set-window-height "+10%"; }
+    Mod+Shift+BracketRight { set-window-height "100%"; }
+
+    Mod+W { focus-workspace-down; }
+    Mod+S { focus-workspace-up; }
+    Mod+Shift+W { move-window-to-workspace-down; }
+    Mod+Shift+S { move-window-to-workspace-up; }
+
+    Mod+Ctrl+W { move-workspace-down; }
+    Mod+Ctrl+S { move-workspace-up; }
+
+    Mod+Alt+W { focus-monitor-up; }
+    Mod+Alt+S { focus-monitor-down; }
+    Mod+Alt+A { focus-monitor-left; }
+    Mod+Alt+D { focus-monitor-right; }
+
+    Mod+Alt+Ctrl+W { move-workspace-to-monitor-up; }
+    Mod+Alt+Ctrl+S { move-workspace-to-monitor-down; }
+    Mod+Alt+Ctrl+A { move-workspace-to-monitor-left; }
+    Mod+Alt+Ctrl+D { move-workspace-to-monitor-right; }
+}

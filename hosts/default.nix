@@ -27,9 +27,8 @@ in {
                         host
 
                         {
-                            dotfiles.meta.args = {
-                                inherit hostName;
-                            };
+                            dotfiles.meta.args = { inherit hostName; };
+                            networking = { inherit hostName; };
                         }
 
                         # ideally this would be within `config/`, but it needs
