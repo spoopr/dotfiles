@@ -18,6 +18,7 @@ in {
         user = {
             foot.enable = true;
             swaylock.enable = true;
+            playerctl.enable = true;
         };
 
         system = {
