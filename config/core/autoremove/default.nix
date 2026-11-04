@@ -5,7 +5,7 @@
 }: let
     inherit (dots.inputs) self;
 in {
-    dotfiles.self.forceEnable = true;
+    dotfiles.self.forceEnable = false;
 
     # automatic generation removing stuff
     # basically, remove up all generations before the previous commit,

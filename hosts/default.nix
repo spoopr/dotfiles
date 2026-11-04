@@ -10,7 +10,7 @@
     inherit (nixpkgs) lib;
 in {
     imports = (import-tree
-        |> (x: x.match ".+\/default\.nix")
+        |> (x: x.match "\/[^\/]+\/default\.nix")
         |> (x: x.addPath ./.)
         |> (x: x.withLib lib)
         |> (x: x.files)

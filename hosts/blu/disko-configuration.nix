@@ -10,104 +10,112 @@
             # the system nvme gets a second, unencrypted partition for booting
             system = {
                 type = "disk";
-                device = "/dev/disk/by-uuid/blah";
                 content = {
                     type = "gpt";
                     partitions = {
-                        boot = {
+                        ESP = {
                             size = "1G";
                             # sgdisk `efi partition` short code
                             type = "EF00";
                             content = {
                                 type = "filesystem";
-                                format = "ext4";
+                                format = "vfat";
                                 mountpoint = "/boot";
                                 mountOptions = [ "umask=0077" ];
                             };
                         };
-                        system = {
+			swap = {
+				size = "32G";
+				content = {
+					type = "swap";
+					randomEncryption = true;
+				};
+			};
+                        main = {
                             size = "100%";
                             content = {
                                 type = "luks";
-                                name = "system";
+                                name = "main-open";
                                 content = {
                                     type = "zfs";
                                     pool = "zsystem";
                                 };
+				passwordFile = "/nix/persist/repos/secrets/password";
                             };
                         };
                     };
                 };
             };
             # aux disks
-            UL = {
+            aux0 = {
                 type = "disk";
-                device = "/dev/disk/by-uuid/bleh";
                 content = {
                     type = "gpt";
+			# partlabels need to be `zfs`
                     partitions.main = {
                         size = "100%";
                         content = {
                             type = "luks";
-                            name = "UL";
+                            name = "aux0-open";
                             content = {
                                 type = "zfs";
                                 pool = "zdata";
                             };
+				passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
             };
-            UR = {
+            aux1 = {
                 type = "disk";
-                device = "/dev/disk/by-uuid/bluh";
                 content = {
                     type = "gpt";
                     partitions.main = {
                         size = "100%";
                         content = {
                             type = "luks";
-                            name = "UR";
+                            name = "aux1-open";
                             content = {
                                 type = "zfs";
                                 pool = "zdata";
                             };
+				passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
             };
-            LL = {
+            aux2 = {
                 type = "disk";
-                device = "/dev/disk/by-uuid/blih";
                 content = {
                     type = "gpt";
                     partitions.main = {
                         size = "100%";
                         content = {
                             type = "luks";
-                            name = "LL";
+                            name = "aux2-open";
                             content = {
                                 type = "zfs";
                                 pool = "zdata";
                             };
+				passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
             };
-            LR = {
+            aux3 = {
                 type = "disk";
-                device = "/dev/disk/by-uuid/bloh";
                 content = {
                     type = "gpt";
                     partitions.main = {
                         size = "100%";
                         content = {
                             type = "luks";
-                            name = "LR";
+                            name = "aux3-open";
                             content = {
                                 type = "zfs";
                                 pool = "zdata";
                             };
+				passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
@@ -139,7 +147,7 @@
                             # no mode, cause only one drive
                             mode = "";
                             members = [
-                                "system"
+                                "/dev/mapper/main-open"
                             ];
                         }
                     ];
@@ -148,6 +156,20 @@
                     # allows for "support vdevs", for tasks like logging and
                     # deduplicating
                 };
+		datasets = {
+			"main" = {
+				type = "zfs_fs";
+
+				mountpoint ="/nix";
+				# systemd is going to mount these, so we set the zfs mountpoint
+				# to `legacy` so it doesn't attempt to mount in a race
+				# condition
+				options = {
+					mountpoint = "legacy";
+					canmount = "on";
+				};
+			};
+		};
             };
 
             zdata = {
@@ -156,16 +178,28 @@
                     type = "topology";
                     vdev = [
                         {
-                            mode = "zraid1";
+                            mode = "raidz1";
                             members = [
-                                "UL"
-                                "UR"
-                                "LL"
-                                "LR"
+                                "/dev/mapper/aux0-open"
+                                "/dev/mapper/aux1-open"
+                                "/dev/mapper/aux2-open"
+                                "/dev/mapper/aux3-open"
                             ];
                         }
                     ];
                 };
+
+		datasets = {
+			"main" = {
+				type = "zfs_fs";
+
+				mountpoint = "/srv/data0";
+				options = {
+					mountpoint = "legacy";
+					canmount = "on";
+				};
+			};
+		};
             };
         };
     };
