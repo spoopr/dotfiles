@@ -10,7 +10,7 @@
     inherit (nixpkgs) lib;
 in {
     imports = (import-tree
-        |> (x: x.match ".+\/default\.nix")
+        |> (x: x.match "\/[^\/]+\/default\.nix")
         |> (x: x.addPath ./.)
         |> (x: x.withLib lib)
         |> (x: x.files)
@@ -27,9 +27,8 @@ in {
                         host
 
                         {
-                            dotfiles.meta.args = {
-                                inherit hostName;
-                            };
+                            dotfiles.meta.args = { inherit hostName; };
+                            networking = { inherit hostName; };
                         }
 
                         # ideally this would be within `config/`, but it needs

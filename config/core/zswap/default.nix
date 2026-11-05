@@ -1,0 +1,19 @@
+{
+  ...
+}: {
+    dotfiles.self.forceEnable = true;
+
+    boot = {
+        kernel.sysctl."vm.swappiness" = 140;
+
+        initrd.kernelModules = [
+            "lz4"
+        ];
+
+        kernelParams = [
+            "zswap.enabled=1"
+            "zswap.compressor=lz4" # apparently the fastest algorithm
+            "zswap.max_pool_percent=20" # might wanna tune this value later
+        ];
+    };
+}

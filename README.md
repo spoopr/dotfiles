@@ -82,9 +82,15 @@ My daily use laptop, a pretty endgame spec AMD Framework 13.
 | :---------------: | :---------------------: | :-------: | :------: |
 | AMD Ryzen 7 7840U | Integrated Raydeon 700M | 32GB DDR5 | 1TB NVMe |
 
+### `blu`
+My personal server, partially cobbled, partially brand new.
+| Processor         | Graphics | Memory    | Storage                                        |
+| :---------------: | :------: | :-------: | :--------------------------------------------: |
+| AMD Ryzen 5 3600X | Variable | 16GB DDR4 | 4x 512GB Enterprise SATA SSD's + 1x 256GB NVMe |
+>>>>>>> origin/main
+
 ### `ftz`
 Technically not a machine, but my custom install image to flash media with.
-
 
 <br />
 
