@@ -4,34 +4,37 @@
     disko.devices = {
         disk.system = {
             type = "disk";
-            partitions = {
-                boot = {
-                    size = "1G";
-                    type="EF00";
-                    content = {
-                        type = "filesystem";
-                        format = "vfat";
-                        mountpoint = "/boot";
-                        mountOptions = [ "umask=0077" ];
-                    };
-                };
-
-                swap = {
-                    size = "64G";
-                    content = {
-                        type = "swap";
-                        randomEncryption = true;
-                    };
-                };
- 
-                main = {
-                    size = "100%";
-                    content = {
-                        type = "luks";
-                        name = "main-open";
+            content = {
+                type = "gpt";
+                partitions = {
+                    boot = {
+                        size = "1G";
+                        type="EF00";
                         content = {
-                            type = "zfs";
-                            pool = "zsystem";
+                            type = "filesystem";
+                            format = "vfat";
+                            mountpoint = "/boot";
+                            mountOptions = [ "umask=0077" ];
+                        };
+                    };
+
+                    swap = {
+                        size = "64G";
+                        content = {
+                            type = "swap";
+                            randomEncryption = true;
+                        };
+                    };
+
+                    main = {
+                        size = "100%";
+                        content = {
+                            type = "luks";
+                            name = "main-open";
+                            content = {
+                                type = "zfs";
+                                pool = "zsystem";
+                            };
                         };
                     };
                 };
