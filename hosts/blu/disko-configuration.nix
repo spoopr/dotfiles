@@ -13,7 +13,7 @@
                 content = {
                     type = "gpt";
                     partitions = {
-                        ESP = {
+                        boot = {
                             size = "1G";
                             # sgdisk `efi partition` short code
                             type = "EF00";
@@ -51,7 +51,6 @@
                 type = "disk";
                 content = {
                     type = "gpt";
-                    # partlabels need to be `zfs`
                     partitions.main = {
                         size = "100%";
                         content = {
@@ -159,15 +158,11 @@
                 datasets = {
                     "main" = {
                         type = "zfs_fs";
-
                         mountpoint ="/nix";
                         # systemd is going to mount these, so we set the zfs mountpoint
                         # to `legacy` so it doesn't attempt to mount in a race
                         # condition
-                        options = {
-                            mountpoint = "legacy";
-                            canmount = "on";
-                        };
+                        options.mountpoint = "legacy";
                     };
                 };
             };
@@ -192,12 +187,8 @@
                 datasets = {
                     "main" = {
                         type = "zfs_fs";
-
                         mountpoint = "/srv/data0";
-                        options = {
-                            mountpoint = "legacy";
-                            canmount = "on";
-                        };
+                        options.mountpoint = "legacy";
                     };
                 };
             };
