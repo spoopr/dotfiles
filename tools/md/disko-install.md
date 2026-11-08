@@ -5,7 +5,7 @@ its entirely possible to do this without having mounted any drives first,
 apparently.
 
 ``` bash
-nixos-generate-config --no-filesystems
+nixos-generate-config --no-filesystems --show-hardware-config > hardware-configuration.nix
 ```
 
 add the generated `hardware-configuration.nix` into your config.
@@ -27,7 +27,7 @@ compared to plain `disko`, `disko-install` requires that you manually specify
 each `disko.devices.disk` item via commandline.
 
 ```bash
-disko-install --flake <path>#<config> --disk <diskname> /dev/<whatever>
+disko-install --mode format --flake <path>#<config> --disk <diskname> /dev/<whatever>
 ```
 
 assuming the install is successful:
