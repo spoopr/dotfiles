@@ -13,7 +13,7 @@
                 content = {
                     type = "gpt";
                     partitions = {
-                        ESP = {
+                        boot = {
                             size = "1G";
                             # sgdisk `efi partition` short code
                             type = "EF00";
@@ -24,13 +24,13 @@
                                 mountOptions = [ "umask=0077" ];
                             };
                         };
-			swap = {
-				size = "32G";
-				content = {
-					type = "swap";
-					randomEncryption = true;
-				};
-			};
+                        swap = {
+                            size = "32G";
+                            content = {
+                                type = "swap";
+                                randomEncryption = true;
+                            };
+                        };
                         main = {
                             size = "100%";
                             content = {
@@ -40,7 +40,7 @@
                                     type = "zfs";
                                     pool = "zsystem";
                                 };
-				passwordFile = "/nix/persist/repos/secrets/password";
+                                passwordFile = "/nix/persist/repos/secrets/password";
                             };
                         };
                     };
@@ -51,7 +51,6 @@
                 type = "disk";
                 content = {
                     type = "gpt";
-			# partlabels need to be `zfs`
                     partitions.main = {
                         size = "100%";
                         content = {
@@ -61,7 +60,7 @@
                                 type = "zfs";
                                 pool = "zdata";
                             };
-				passwordFile = "/nix/persist/repos/secrets/password";
+                            passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
@@ -79,7 +78,7 @@
                                 type = "zfs";
                                 pool = "zdata";
                             };
-				passwordFile = "/nix/persist/repos/secrets/password";
+                            passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
@@ -97,7 +96,7 @@
                                 type = "zfs";
                                 pool = "zdata";
                             };
-				passwordFile = "/nix/persist/repos/secrets/password";
+                            passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
@@ -115,7 +114,7 @@
                                 type = "zfs";
                                 pool = "zdata";
                             };
-				passwordFile = "/nix/persist/repos/secrets/password";
+                            passwordFile = "/nix/persist/repos/secrets/password";
                         };
                     };
                 };
@@ -156,20 +155,16 @@
                     # allows for "support vdevs", for tasks like logging and
                     # deduplicating
                 };
-		datasets = {
-			"main" = {
-				type = "zfs_fs";
-
-				mountpoint ="/nix";
-				# systemd is going to mount these, so we set the zfs mountpoint
-				# to `legacy` so it doesn't attempt to mount in a race
-				# condition
-				options = {
-					mountpoint = "legacy";
-					canmount = "on";
-				};
-			};
-		};
+                datasets = {
+                    "main" = {
+                        type = "zfs_fs";
+                        mountpoint ="/nix";
+                        # systemd is going to mount these, so we set the zfs mountpoint
+                        # to `legacy` so it doesn't attempt to mount in a race
+                        # condition
+                        options.mountpoint = "legacy";
+                    };
+                };
             };
 
             zdata = {
@@ -189,17 +184,13 @@
                     ];
                 };
 
-		datasets = {
-			"main" = {
-				type = "zfs_fs";
-
-				mountpoint = "/srv/data0";
-				options = {
-					mountpoint = "legacy";
-					canmount = "on";
-				};
-			};
-		};
+                datasets = {
+                    "main" = {
+                        type = "zfs_fs";
+                        mountpoint = "/srv/data0";
+                        options.mountpoint = "legacy";
+                    };
+                };
             };
         };
     };

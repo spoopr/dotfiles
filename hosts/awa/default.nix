@@ -7,6 +7,7 @@
 
     system.stateVersion = "24.05";
 
+    networking.hostId = "0ff8d1f3";
 
     dotfiles = {
         core = {

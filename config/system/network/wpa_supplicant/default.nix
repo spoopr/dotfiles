@@ -259,9 +259,9 @@
         # while this serves to place the `required.conf` file, it also pulls
         # double duty to create the `/etc/wpa_supplicant` directory
         etc."wpa_supplicant/required.conf".text = ''
-	ctrl_interface=/run/wpa_supplicant/control
-	ctrl_interface_group=wpa_supplicant
-	update_config=1
+            ctrl_interface=/run/wpa_supplicant/control
+            ctrl_interface_group=wpa_supplicant
+            update_config=1
 
             # disable scanning
             bgscan=""

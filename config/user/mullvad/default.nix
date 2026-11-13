@@ -1,32 +1,29 @@
 {
   pkgs,
   ...
-}: let
-    placeProfile = pkgs.writeScript "placeMullvadBrowserProfile" ''
-        if [ ! -d ~/.mullvad/mullvadbrowser/profile ]; then
-            mkdir -p ~/.mullvad/mullvadbrowser
-            tar -xf ${./profile.tar.gz} -C ~/.mullvad/mullvadbrowser/
-            chmod +w -R ~/.mullvad/mullvadbrowser/profile
-        fi
-    '';
-
-    wrappervad-browser = (pkgs.symlinkJoin {
-        name = "wrappedMullvad-browser";
-        paths = [ pkgs.mullvad-browser ];
-        buildInputs = [ pkgs.makeWrapper ];
-        postBuild = ''
-            wrapProgram $out/bin/mullvad-browser \
-            --run ${placeProfile} \
-            --add-flags "--profile ~/.mullvad/mullvadbrowser/profile"
-        '';
-    });
-
-in {
+}: {
     dotfiles = {
         user.niri.enable = true;
     };
 
     environment.systemPackages = [
-        wrappervad-browser
+        (pkgs.mullvad-browser.overrideAttrs {
+            postBuild = ''
+                # this postBuild is a custom extension of the
+                # `nixpkgs#mullvad-browser` package; see the original for
+                # implementation details
+                cat >>mozilla.cfg << EOF
+                // use blank pages for homepage and newtab pages
+                pref("browser.startup.homepage", "chrome://browser/content/blanktab.html")
+                pref("browser.newtabpage.enabled", false)
+
+                // hide the "using your system language" popup
+                pref("intl.language_notification.shown", true)
+
+                // use firefox darkmode
+                pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")
+                EOF
+                '';
+        })
     ];
 }
