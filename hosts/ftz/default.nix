@@ -15,10 +15,8 @@
         supportedFilesystems = [
             "ext4"
             "vfat"
-            "zfs"
         ];
 
-        initrd.supportedFilesystems = [ "zfs" ];
         initrd.availableKernelModules = [
             "usb_storage"
             "xhci_pci"
@@ -27,12 +25,6 @@
 
         loader.efi.canTouchEfiVariables = true;
         loader.systemd-boot.enable = true;
-
-        zfs = {
-            forceImportAll = true;
-            forceImportRoot = true;
-        };
-
     };
 
     networking.hostId = "9f0e18d7";
