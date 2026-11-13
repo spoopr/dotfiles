@@ -1,18 +1,10 @@
 {
-    lib,
+    inputs,
     ...
 }: let
-    inherit (lib) types;
+    inherit (inputs) homebrew;
 in {
-    options.flake.lib = lib.mkOption {
-        type = types.attrs
-            // {
-                merge = locations: definitions: definitions
-                    |> lib.getValues
-                    |> lib.foldl
-                        (lib.recursiveUpdate)
-                        {};
-            };
-        default = {};
-    };
+    imports = [
+        (homebrew.modules.mkCustomOutput [ "lib" ])
+    ];
 }
