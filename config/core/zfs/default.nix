@@ -7,6 +7,7 @@
     dotfiles.self.forceEnable = true;
 
     boot = {
+        # ripped [from](https://wiki.nixos.org/wiki/ZFS)
         kernelPackages = pkgs.linuxKernel.packages
             |> lib.filterAttrs (name: kernel:
                 (builtins.match "linux_[0-9]+_[0-9]+" name) != null
@@ -23,5 +24,13 @@
 
         supportedFilesystems = [ "zfs" ];
         initrd.supportedFilesystems = [ "zfs" ];
+
+        # on creation of a zpool with `disko`, the hostid is set to that of the
+        # install media. you could manually update the hostid of a zpool after
+        # creation, but zfs hostids are being deprecated anyways, so, eh.
+        zfs = {
+            forceImportAll = true;
+            forceImportRoot = true;
+        };
     };
 }
