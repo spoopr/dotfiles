@@ -8,7 +8,6 @@
         colors.url = "github:spoopr/lavndr";
         homebrew.url = "github:spoopr/homebrew";
 
-        lanzaboote.url =  "github:nix-community/lanzaboote/v1.1.0";
         impermanence.url = "github:nix-community/impermanence";
 
         import-tree.url = "github:vic/import-tree";
