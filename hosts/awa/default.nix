@@ -10,10 +10,6 @@
     networking.hostId = "0ff8d1f3";
 
     dotfiles = {
-        core = {
-            luks.enable = true;
-        };
-
         system = {
             auth.users.spoopr.enable = true;
 
@@ -68,6 +64,23 @@
             onlyoffice.enable = true;
             wireshark.enable = true;
             nvim.enable = true;
+        };
+    };
+
+
+    boot = {
+        loader.efi.canTouchEfiVariables = true;
+
+        initrd = {
+            # this is required for unattended luks unlock
+            systemd.enable = true;
+
+            luks.devices = {
+                root = {
+                    device = "/dev/nvme0n1p2";
+                    preLVM = true;
+                };
+            };
         };
     };
 }
