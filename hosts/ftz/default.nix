@@ -38,8 +38,10 @@
             "thunderbolt"
         ];
 
-        loader.efi.canTouchEfiVariables = true;
-        loader.systemd-boot.enable = true;
+        loader = {
+            efi.canTouchEfiVariables = true;
+            limine.efiInstallAsRemovable = true;
+        };
     };
 
     networking.hostId = "9f0e18d7";
