@@ -6,6 +6,21 @@
         ./disko-configuration.nix
     ];
 
+    dotfiles = {
+        system.network.wpa_supplicant.options = {
+            wireless = {
+                enable = true;
+                detectInterfaces = true;
+            };
+            wired = {
+                enable = true;
+                detectInterfaces = true;
+            };
+        };
+
+        user.nvim.enable = true;
+    };
+
     users.users.root.password = lib.mkForce "toor";
 
     # normally set by hardware-configuration.nix, but of course there isn't one
