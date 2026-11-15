@@ -46,6 +46,8 @@
                 keyd.options.capslockToAlt = true;
 
                 fprintd.enable = true;
+
+                bluetooth.enable = true;
             };
 
             tools = {
