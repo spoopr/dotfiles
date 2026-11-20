@@ -7,10 +7,10 @@
 in {
     dotfiles.self.forceEnable = true;
 
-    # the limine installer hardcodes a check for `/var/lib/sbctl`, ignoring
-    # the sbctl config, so point it at the persisted keys
+    # the limine installer hardcodes an existence check for `/var/lib/sbctl`,
+    # ignoring the sbctl config, so create it to satisfy the check
     systemd.tmpfiles.rules = [
-        "L+ /var/lib/sbctl - - - - /nix/persist/repos/secureboot"
+        "d /var/lib/sbctl 0700 root root -"
     ];
 
     boot.loader = {
