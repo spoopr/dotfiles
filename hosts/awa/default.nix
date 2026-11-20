@@ -66,6 +66,7 @@
             onlyoffice.enable = true;
             wireshark.enable = true;
             nvim.enable = true;
+            claude.enable = true;
         };
     };
 
