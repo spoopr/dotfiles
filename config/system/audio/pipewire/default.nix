@@ -28,9 +28,7 @@
                             "bluez5.enable-hw-volume" = true;
                             "bluez5.roles" = [
                                 "a2dp_source"
-                                "a2dp_sink"
                                 "bap_source"
-                                "bap_sink"
                             ];
                         };
                     };
