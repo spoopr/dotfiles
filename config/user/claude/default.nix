@@ -22,12 +22,15 @@ in {
     dotfiles = {
         system.nix.unfree.enable = true;
 
+        # impermanence only applies these when it creates the persisted source
+        # directory, so changing them needs a manual chown/chmod of
+        # /nix/persist${stateDir}
         core.impermanence.options.paths = [
             {
                 directory = stateDir;
-                user = "spoopr";
-                group = "users";
-                mode = "700";
+                user = "root";
+                group = "claude";
+                mode = "770";
             }
         ];
     };
