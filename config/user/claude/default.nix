@@ -16,6 +16,7 @@
         "settings.json"
         "CLAUDE.md"
         "skills"
+        "themes"
     ];
 in {
     dotfiles = {
