@@ -47,6 +47,10 @@ in {
         |> lib.singleton
     ;
 
+    # without this, memory defaults to `${stateDir}/projects/<cwd>/memory/`:
+    # one directory per working directory, so memories don't carry across
+    # projects, and they're scattered inside the state dir instead of living in
+    # a single private repo
     environment.etc."claude-code/managed-settings.json".text = builtins.toJSON {
         autoMemoryDirectory = "${stateDir}/memory";
     };
