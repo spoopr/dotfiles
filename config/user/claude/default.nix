@@ -32,8 +32,13 @@ in {
         ];
     };
 
+    users.groups.claude.members = [
+        "spoopr"
+    ];
+
+    # tmpfiles applies ownership to the symlinks themselves (mode is ignored)
     systemd.tmpfiles.rules = configFiles
-        |> map (file: "L+ ${stateDir}/${file} - - - - ${configRepo}/${file}")
+        |> map (file: "L+ ${stateDir}/${file} - root claude - ${configRepo}/${file}")
     ;
 
     environment.systemPackages = {
