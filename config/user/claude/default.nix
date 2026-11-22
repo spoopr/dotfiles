@@ -14,6 +14,7 @@
     configRepo = "/nix/persist/repos/claude";
     configFiles = [
         "settings.json"
+        "keybindings.json"
         "CLAUDE.md"
         "skills"
         "themes"
