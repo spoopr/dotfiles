@@ -12,7 +12,9 @@
     # <!-- /claude -->
     stateDir = "/var/lib/claude-code";
 
-    # <!-- claude --> the public repo only holds configuration, linked into the state dir <!-- /claude -->
+    # <!-- claude -->
+    # the public repo only holds configuration, linked into the state dir
+    # <!-- /claude -->
     configRepo = "/nix/persist/repos/claude";
     configFiles = [
         "settings.json"
@@ -44,7 +46,9 @@ in {
         "spoopr"
     ];
 
-    # <!-- claude --> tmpfiles applies ownership to the symlinks themselves (mode is ignored) <!-- /claude -->
+    # <!-- claude -->
+    # tmpfiles applies ownership to the symlinks themselves (mode is ignored)
+    # <!-- /claude -->
     systemd.tmpfiles.rules = configFiles
         |> map (file: "L+ ${stateDir}/${file} - root claude - ${configRepo}/${file}")
     ;
