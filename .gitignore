@@ -6,7 +6,7 @@ result/
 repl-result-out
 repl-result-out/
 
-# claude code: local/personal state
+# <!-- claude --> claude code: local/personal state <!-- /claude -->
 .claude/settings.local.json
 .claude/worktrees/
 CLAUDE.local.md

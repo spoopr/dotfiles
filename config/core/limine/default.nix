@@ -7,8 +7,10 @@
 in {
     dotfiles.self.forceEnable = true;
 
+    # <!-- claude -->
     # the limine installer hardcodes an existence check for `/var/lib/sbctl`,
     # ignoring the sbctl config, so create it to satisfy the check
+    # <!-- /claude -->
     systemd.tmpfiles.rules = [
         "d /var/lib/sbctl 0700 root root -"
     ];
