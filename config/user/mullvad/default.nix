@@ -26,4 +26,18 @@
                 '';
         })
     ];
+
+    # <!-- claude -->
+    # make mullvad-browser the default for web links and html files
+    # <!-- /claude -->
+    xdg.mime.defaultApplications = {
+        "text/html" = "mullvad-browser.desktop";
+        "application/xhtml+xml" = "mullvad-browser.desktop";
+        "x-scheme-handler/http" = "mullvad-browser.desktop";
+        "x-scheme-handler/https" = "mullvad-browser.desktop";
+        "x-scheme-handler/about" = "mullvad-browser.desktop";
+        "x-scheme-handler/unknown" = "mullvad-browser.desktop";
+    };
+
+    environment.sessionVariables.BROWSER = "mullvad-browser";
 }
