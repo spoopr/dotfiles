@@ -35,7 +35,7 @@ in {
         core.impermanence.options.paths = [
             {
                 directory = stateDir;
-                user = "root";
+                user = "spoopr";
                 group = "claude";
                 mode = "770";
             }
