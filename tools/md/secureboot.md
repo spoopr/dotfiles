@@ -15,13 +15,9 @@ sudo sbctl create-keys -e ${path to keys directory}
 ### enroll keys
 ```bash
 sudo sbctl import-keys --directory ${path to keys directory}
-sudo sbctl enroll-keys --microsoft
+sudo sbctl enroll-keys
 ```
 reboot to enact changes
-#### framework specific actions
-enable secure boot
-1. in bio settings, go to "Administer Secure Boot"
-2. enable "Enfore Secure Boot"
 
 # done
 
